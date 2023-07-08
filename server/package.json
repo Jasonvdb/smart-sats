@@ -1,0 +1,24 @@
+{
+  "name": "smart-sats-demo-server",
+  "version": "1.0.0",
+  "description": "Smart Sats demo AI agent server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasonvdb/smart-sats.git"
+  },
+  "author": "Jason",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jasonvdb/smart-sats/issues"
+  },
+  "homepage": "https://github.com/Jasonvdb/smart-sats#readme",
+  "dependencies": {
+    "ln-service": "^56.8.0",
+    "openai": "^3.3.0",
+    "socket.io": "^4.7.1"
+  }
+}
