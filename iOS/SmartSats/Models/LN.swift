@@ -22,6 +22,14 @@ fileprivate class SDKLogs: LogStream {
     }
 }
 
+//Used to throw an error with relevent message caught from SdkError
+struct SdkDisplayError: LocalizedError {
+    var message: String
+    var errorDescription: String? {
+        return NSLocalizedString(message, comment: "")
+    }
+}
+
 enum LNErrors: Error {
     case missingSeed
     case missingStorage
@@ -269,9 +277,8 @@ class LN: ObservableObject {
                     switch sdkError as SdkError {
                     case .Error(let message):
                         print("SdkError: \(message)")
+                        continuation.resume(throwing: SdkDisplayError(message: message))
                     }
-                    
-                    continuation.resume(throwing: sdkError)
                 } catch {
                     continuation.resume(throwing: error)
                 }

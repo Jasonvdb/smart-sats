@@ -13,6 +13,10 @@
 		96158F2A2A58A0230053C4DA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F292A58A0230053C4DA /* View.swift */; };
 		96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2B2A58A06D0053C4DA /* UInt64.swift */; };
 		96158F2F2A58A1020053C4DA /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2E2A58A1020053C4DA /* AsyncButton.swift */; };
+		96158F312A5B1D610053C4DA /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F302A5B1D610053C4DA /* Clipboard.swift */; };
+		96158F342A5B225E0053C4DA /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F332A5B225E0053C4DA /* Receive.swift */; };
+		96158F362A5B24710053C4DA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F352A5B24710053C4DA /* String.swift */; };
+		96158F382A5B26070053C4DA /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F372A5B26070053C4DA /* UIScreen.swift */; };
 		96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A292A5745E800719F8F /* SmartSatsApp.swift */; };
 		96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A2B2A5745E800719F8F /* ContentView.swift */; };
 		96EF6A2E2A5745EA00719F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EF6A2D2A5745EA00719F8F /* Assets.xcassets */; };
@@ -25,6 +29,10 @@
 		96158F292A58A0230053C4DA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		96158F2B2A58A06D0053C4DA /* UInt64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UInt64.swift; sourceTree = "<group>"; };
 		96158F2E2A58A1020053C4DA /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
+		96158F302A5B1D610053C4DA /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
+		96158F332A5B225E0053C4DA /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
+		96158F352A5B24710053C4DA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		96158F372A5B26070053C4DA /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		96EF6A262A5745E800719F8F /* SmartSats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EF6A292A5745E800719F8F /* SmartSatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSatsApp.swift; sourceTree = "<group>"; };
 		96EF6A2B2A5745E800719F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				96158F262A589F8F0053C4DA /* KeyChain.swift */,
+				96158F302A5B1D610053C4DA /* Clipboard.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -66,6 +75,8 @@
 			children = (
 				96158F292A58A0230053C4DA /* View.swift */,
 				96158F2B2A58A06D0053C4DA /* UInt64.swift */,
+				96158F372A5B26070053C4DA /* UIScreen.swift */,
+				96158F352A5B24710053C4DA /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -76,6 +87,14 @@
 				96158F2E2A58A1020053C4DA /* AsyncButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		96158F322A5B22500053C4DA /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				96158F332A5B225E0053C4DA /* Receive.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		96EF6A1D2A5745E800719F8F = {
@@ -97,6 +116,7 @@
 		96EF6A282A5745E800719F8F /* SmartSats */ = {
 			isa = PBXGroup;
 			children = (
+				96158F322A5B22500053C4DA /* Screens */,
 				96158F2D2A58A0EB0053C4DA /* Components */,
 				96158F1F2A589F0E0053C4DA /* Models */,
 				96158F202A589F1A0053C4DA /* Utils */,
@@ -194,12 +214,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96158F342A5B225E0053C4DA /* Receive.swift in Sources */,
 				96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */,
 				96158F2F2A58A1020053C4DA /* AsyncButton.swift in Sources */,
+				96158F312A5B1D610053C4DA /* Clipboard.swift in Sources */,
 				96158F272A589F8F0053C4DA /* KeyChain.swift in Sources */,
 				96158F2A2A58A0230053C4DA /* View.swift in Sources */,
+				96158F382A5B26070053C4DA /* UIScreen.swift in Sources */,
 				96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */,
 				96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */,
+				96158F362A5B24710053C4DA /* String.swift in Sources */,
 				96158F222A589F300053C4DA /* LN.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

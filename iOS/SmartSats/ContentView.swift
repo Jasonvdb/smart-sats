@@ -11,7 +11,10 @@ struct ContentView: View {
     @ObservedObject var ln = LN.shared
     @State var displayError = ""
     @State var message = ""
-
+    
+    @State var receiveInvoice = ""
+    @State var showReceive = false
+    
     var body: some View {
         VStack {
             if let info = ln.nodeInfo {
@@ -21,7 +24,7 @@ struct ContentView: View {
                 Text("Peers: \(info.connectedPeers.joined(separator: ", "))")
             }
             
-            Text(displayError).foregroundColor(.red)
+            Text(displayError).foregroundColor(.red).font(.footnote)
             Text(message).foregroundColor(.green)
 
             if !ln.hasNode {
@@ -62,8 +65,10 @@ struct ContentView: View {
             AsyncButton(title: "Recieve") {
                 displayError = ""
                 do {
-                    let res = try await ln.receive(amountSats: UInt64((arc4random_uniform(31)) + 20), description: "Testing UI")
-                    message = res.bolt11
+                    let sats = UInt64((arc4random_uniform(31)) + 20)
+                    let res = try await ln.receive(amountSats: 5000, description: "Testing UI")
+                    receiveInvoice = res.bolt11
+                    showReceive = true
                 } catch  {
                     displayError = error.localizedDescription
                 }
@@ -72,8 +77,12 @@ struct ContentView: View {
             AsyncButton(title: "Pay") {
                 displayError = ""
                 do {
-                    let inv = "lnbc1pj2sekepp5sq46emget8lpxqmqww2p9439eev9zqr9t8jzp54vm4x4xmuahuvsdqdw3jhxar9v4jk2cqzzsxqrrsssp5hg38frv6s0kpk4895s67cycvs97jm89t8ahp8tlsmlxguwvqajcs9qyyssq46zgllq3kfcvdexz7dpyaycxedx0td7j9dz243s0exm53djywykr50t3vz36qx0r0y4a7qrws339ycj5qr6m9ruwjc7w7xeq8qym58spde4cad"
-                    let res = try await ln.pay(inv, amountSats: 100)
+                    guard let inv = clipboard() else {
+                        message = "Empty clipboard"
+                        return
+                    }
+                    
+                    let res = try await ln.pay(inv)
                     message = "Paid!"
                 } catch  {
                     displayError = error.localizedDescription
@@ -91,6 +100,9 @@ struct ContentView: View {
                 Text("\(payment.amountMsat.sats)")
             }
         }
+        .sheet(isPresented: $showReceive, content: {
+            Receive(invoice: $receiveInvoice)
+        })
         .onBackground {
             Task {
                 do {
