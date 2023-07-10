@@ -68,6 +68,7 @@ class LN: ObservableObject {
     
     @Published var nodeInfo: NodeState?
     @Published var payments: [Payment] = []
+    @Published var successfulPaymentIds: [String] = []
 
     private var greenlightCredentials: GreenlightCredentials? {
         get {
@@ -135,31 +136,35 @@ class LN: ObservableObject {
     fileprivate func handleEvent(_ e: BreezEvent) {
         print("received event ", e)
         
-        switch e {
-        case .synced:
-            break
-        case .newBlock(let block):
-            print(block)
-            break
-        case .backupStarted:
-            break
-        case .backupSucceeded:
-            break
-        case .backupFailed(let details):
-            print(details)
-            break
-        case .invoicePaid(let details):
-            print(details.paymentHash)
-            break
-        case .paymentFailed(let details):
-            print("PAYMENT FAILED: " + details.error)
-            break
-        case .paymentSucceed(let details):
-            print(details)
-            break
+        DispatchQueue.main.async {
+            switch e {
+            case .synced:
+                break
+            case .newBlock(let block):
+                print(block)
+                break
+            case .backupStarted:
+                break
+            case .backupSucceeded:
+                break
+            case .backupFailed(let details):
+                print(details)
+                break
+            case .invoicePaid(let details):
+                print(details.paymentHash)
+                break
+            case .paymentFailed(let details):
+                print("PAYMENT FAILED: " + details.error)
+                break
+            case .paymentSucceed(let details):
+                print("***SUCCCESS***")
+                print(details)
+                self.successfulPaymentIds.append(details.id)
+                break
+            }
+            
+            self.syncUI()
         }
-        
-        self.syncUI()
     }
     
     /// Syncs all node details to published vars from UI thread

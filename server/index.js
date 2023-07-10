@@ -1,5 +1,6 @@
 const http = require('http');
 const {Configuration, OpenAIApi} = require("openai");
+const {chargeUser} = require('./ln');
 
 const OPEN_AI_API_KEY = process.env.OPEN_AI_API_KEY;
 if (!OPEN_AI_API_KEY) {
@@ -77,10 +78,14 @@ io.on('connection', async (socket) => {
 
         socket.emit('progress_response', "Request received 👀");
 
-        const htmlCost = 2000;
+        const htmlCost = 20;
         socket.emit('progress_response', "Charging user " + htmlCost + " sats 💰 (for html generation)");
-        await confirmPayment(htmlCost);
-        //TODO charge user 
+        const paid = await chargeUser(htmlCost);
+        // if (!paid) {
+        //     socket.emit('progress_response', "Payment not received. Aborting... ❌");
+        //     socket.emit('code_response', '[ERROR]');
+        //     return;
+        // }
 
         socket.emit('progress_response', "Payment received! 🤑");
         
@@ -114,9 +119,9 @@ io.on('connection', async (socket) => {
 
                         socket.emit('progress_response', "Code completed ✅");
 
-                        const imageCost = 3000;
+                        const imageCost = 30;
                         socket.emit('progress_response', "Charging user " + imageCost + " sats 💰 (for image generation)");
-                        await confirmPayment(imageCost);
+                        await chargeUser(imageCost);
 
                         socket.emit('progress_response', "Payment received! 🤑 Generating image...");
 
@@ -196,11 +201,4 @@ async function getImage(data) {
     const contentType = response.headers.get('content-type');
 
     return `data:${contentType};base64,${Buffer.from(blob).toString('base64')}`;
-}
-
-async function confirmPayment(amount) {
-    //TODO
-    await new Promise(resolve => setTimeout(resolve, 20000));
-
-    return true;
 }

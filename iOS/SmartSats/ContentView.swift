@@ -26,6 +26,7 @@ struct ContentView: View {
             
             Text(displayError).foregroundColor(.red).font(.footnote)
             Text(message).foregroundColor(.green)
+            Text("Payments: \(ln.successfulPaymentIds.count)")
 
             if !ln.hasNode {
                 AsyncButton(title: "Register node") {
@@ -103,26 +104,6 @@ struct ContentView: View {
         .sheet(isPresented: $showReceive, content: {
             Receive(invoice: $receiveInvoice)
         })
-        .onBackground {
-            Task {
-                do {
-                    try await ln.stop()
-                    message = "Stopped"
-                } catch {
-                    print("Failed to stop node")
-                }
-            }
-        }
-        .onForeground {
-            Task {
-                do {
-                    try await ln.start()
-                    message = "Started"
-                } catch {
-                    print("Failed to stop node")
-                }
-            }
-        }
     }
 }
 

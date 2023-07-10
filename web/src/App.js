@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from 'socket.io-client';
 
-const socket = io('http://192.168.2.138:3210', {
+const socket = io('http://192.168.1.108:3210', {
   auth: {
     token: 'your-auth-token' //TODO
   }
@@ -28,6 +28,12 @@ const App = () => {
         setIsReady(true);
         setResponse((prevData) => prevData.replaceAll("\`\`\`html", ""));      
         setResponse((prevData) => prevData.replaceAll("\`\`\`", ""));      
+        return;
+      }
+
+      if (data == '[ERROR]') {
+        setStatus("Error! ❌");
+        setIsReady(true);
         return;
       }
       
