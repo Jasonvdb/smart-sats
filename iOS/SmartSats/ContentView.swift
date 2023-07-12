@@ -52,6 +52,17 @@ struct ContentView: View {
                 }
             }
             
+            AsyncButton(title: "Setup background charges") {
+                requestPushNotificationPermision { success, error in
+                    guard error == nil else {
+                        displayError = error!.localizedDescription
+                        return
+                    }
+                    
+                    message = "Background charges setup"
+                }
+            }
+            
             AsyncButton(title: "LSP") {
                 displayError = ""
                 do {

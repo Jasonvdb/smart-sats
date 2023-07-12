@@ -37,12 +37,23 @@ const peers = [
         //Voltage:
         public_key: '02cfdc6b60e5931d174a342b20b50d6a2a17c6e4ef8e077ea54069a3541ad50eb0',
         socket: '52.89.237.109:9735'
+    },
+    {
+        //Digital ocean node
+        public_key: "034a6d609dde7a8835c7e652cfbeb380a891c5b8881efa458e0d0bb78a30da4d68",
+        socket: "144.126.204.130:9735"
+    },
+    {
+        //Blocktank
+        public_key: "0296b2db342fcf87ea94d981757fdf4d3e545bd5cef4919f58b5d38dfdd73bf5c9",
+        socket: "146.148.127.140:9735"
     }
 ];
 
 peers.forEach((peer) => {
     const {public_key, socket} = peer;
 
+    console.log("Adding peer" + public_key + "@" + socket);
     lnService.addPeer({lnd, socket, public_key}, (err, result) => {
         if (err) {
             console.log(err);
@@ -79,7 +90,7 @@ async function chargeUser(amount) {
             lnd,
             tokens: amount,
             description: 'testeeee',
-            is_including_private_channels: true,
+            is_including_private_channels: false,
             expires_at: new Date(Date.now() + 60 * 60 * 1000).toISOString()
         }, (err, result) => {
             if (err) {

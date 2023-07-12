@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96094A3E2A5E70D0004A4A62 /* BreezSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 96094A3D2A5E70D0004A4A62 /* BreezSDK */; };
+		96094A3F2A5E70D4004A4A62 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F262A589F8F0053C4DA /* KeyChain.swift */; };
+		96094A402A5E70D4004A4A62 /* LN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F212A589F300053C4DA /* LN.swift */; };
+		96094A422A5E73C3004A4A62 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A412A5E73C3004A4A62 /* Charge.swift */; };
+		96094A432A5E7539004A4A62 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A412A5E73C3004A4A62 /* Charge.swift */; };
+		96094A442A5E7D47004A4A62 /* UInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2B2A58A06D0053C4DA /* UInt64.swift */; };
 		96158F222A589F300053C4DA /* LN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F212A589F300053C4DA /* LN.swift */; };
 		96158F252A589F4D0053C4DA /* BreezSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 96158F242A589F4D0053C4DA /* BreezSDK */; };
 		96158F272A589F8F0053C4DA /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F262A589F8F0053C4DA /* KeyChain.swift */; };
@@ -17,13 +23,40 @@
 		96158F342A5B225E0053C4DA /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F332A5B225E0053C4DA /* Receive.swift */; };
 		96158F362A5B24710053C4DA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F352A5B24710053C4DA /* String.swift */; };
 		96158F382A5B26070053C4DA /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F372A5B26070053C4DA /* UIScreen.swift */; };
+		961BBA622A5D2D3600EE36AE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BBA612A5D2D3600EE36AE /* NotificationService.swift */; };
+		961BBA662A5D2D3600EE36AE /* SmartSatsPushNotification.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A292A5745E800719F8F /* SmartSatsApp.swift */; };
 		96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A2B2A5745E800719F8F /* ContentView.swift */; };
 		96EF6A2E2A5745EA00719F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EF6A2D2A5745EA00719F8F /* Assets.xcassets */; };
 		96EF6A322A5745EA00719F8F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EF6A312A5745EA00719F8F /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		961BBA642A5D2D3600EE36AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96EF6A1E2A5745E800719F8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 961BBA5E2A5D2D3600EE36AE;
+			remoteInfo = SmartSatsPushNotification;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		961BBA672A5D2D3600EE36AE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				961BBA662A5D2D3600EE36AE /* SmartSatsPushNotification.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		96094A412A5E73C3004A4A62 /* Charge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charge.swift; sourceTree = "<group>"; };
 		96158F212A589F300053C4DA /* LN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LN.swift; sourceTree = "<group>"; };
 		96158F262A589F8F0053C4DA /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		96158F292A58A0230053C4DA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -33,6 +66,11 @@
 		96158F332A5B225E0053C4DA /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
 		96158F352A5B24710053C4DA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		96158F372A5B26070053C4DA /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
+		961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SmartSatsPushNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		961BBA612A5D2D3600EE36AE /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		961BBA632A5D2D3600EE36AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		961BBA6B2A5D2D4F00EE36AE /* SmartSatsPushNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSatsPushNotification.entitlements; sourceTree = "<group>"; };
+		961BBA6C2A5D3AFA00EE36AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		96EF6A262A5745E800719F8F /* SmartSats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EF6A292A5745E800719F8F /* SmartSatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSatsApp.swift; sourceTree = "<group>"; };
 		96EF6A2B2A5745E800719F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +80,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		961BBA5C2A5D2D3600EE36AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96094A3E2A5E70D0004A4A62 /* BreezSDK in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96EF6A232A5745E800719F8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				96158F212A589F300053C4DA /* LN.swift */,
+				96094A412A5E73C3004A4A62 /* Charge.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,11 +144,30 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		961BBA602A5D2D3600EE36AE /* SmartSatsPushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				961BBA6B2A5D2D4F00EE36AE /* SmartSatsPushNotification.entitlements */,
+				961BBA612A5D2D3600EE36AE /* NotificationService.swift */,
+				961BBA632A5D2D3600EE36AE /* Info.plist */,
+			);
+			path = SmartSatsPushNotification;
+			sourceTree = "<group>";
+		};
+		961BBA6F2A5DD42900EE36AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		96EF6A1D2A5745E800719F8F = {
 			isa = PBXGroup;
 			children = (
 				96EF6A282A5745E800719F8F /* SmartSats */,
+				961BBA602A5D2D3600EE36AE /* SmartSatsPushNotification */,
 				96EF6A272A5745E800719F8F /* Products */,
+				961BBA6F2A5DD42900EE36AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				96EF6A262A5745E800719F8F /* SmartSats.app */,
+				961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +183,7 @@
 		96EF6A282A5745E800719F8F /* SmartSats */ = {
 			isa = PBXGroup;
 			children = (
+				961BBA6C2A5D3AFA00EE36AE /* Info.plist */,
 				96158F322A5B22500053C4DA /* Screens */,
 				96158F2D2A58A0EB0053C4DA /* Components */,
 				96158F1F2A589F0E0053C4DA /* Models */,
@@ -141,6 +209,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		961BBA5E2A5D2D3600EE36AE /* SmartSatsPushNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 961BBA6A2A5D2D3600EE36AE /* Build configuration list for PBXNativeTarget "SmartSatsPushNotification" */;
+			buildPhases = (
+				961BBA5B2A5D2D3600EE36AE /* Sources */,
+				961BBA5C2A5D2D3600EE36AE /* Frameworks */,
+				961BBA5D2A5D2D3600EE36AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartSatsPushNotification;
+			packageProductDependencies = (
+				96094A3D2A5E70D0004A4A62 /* BreezSDK */,
+			);
+			productName = SmartSatsPushNotification;
+			productReference = 961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		96EF6A252A5745E800719F8F /* SmartSats */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96EF6A352A5745EA00719F8F /* Build configuration list for PBXNativeTarget "SmartSats" */;
@@ -148,10 +236,12 @@
 				96EF6A222A5745E800719F8F /* Sources */,
 				96EF6A232A5745E800719F8F /* Frameworks */,
 				96EF6A242A5745E800719F8F /* Resources */,
+				961BBA672A5D2D3600EE36AE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				961BBA652A5D2D3600EE36AE /* PBXTargetDependency */,
 			);
 			name = SmartSats;
 			packageProductDependencies = (
@@ -171,6 +261,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					961BBA5E2A5D2D3600EE36AE = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
 					96EF6A252A5745E800719F8F = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -193,11 +286,19 @@
 			projectRoot = "";
 			targets = (
 				96EF6A252A5745E800719F8F /* SmartSats */,
+				961BBA5E2A5D2D3600EE36AE /* SmartSatsPushNotification */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		961BBA5D2A5D2D3600EE36AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96EF6A242A5745E800719F8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,11 +311,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		961BBA5B2A5D2D3600EE36AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				961BBA622A5D2D3600EE36AE /* NotificationService.swift in Sources */,
+				96094A432A5E7539004A4A62 /* Charge.swift in Sources */,
+				96094A3F2A5E70D4004A4A62 /* KeyChain.swift in Sources */,
+				96094A402A5E70D4004A4A62 /* LN.swift in Sources */,
+				96094A442A5E7D47004A4A62 /* UInt64.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96EF6A222A5745E800719F8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				96158F342A5B225E0053C4DA /* Receive.swift in Sources */,
+				96094A422A5E73C3004A4A62 /* Charge.swift in Sources */,
 				96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */,
 				96158F2F2A58A1020053C4DA /* AsyncButton.swift in Sources */,
 				96158F312A5B1D610053C4DA /* Clipboard.swift in Sources */,
@@ -230,7 +344,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		961BBA652A5D2D3600EE36AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 961BBA5E2A5D2D3600EE36AE /* SmartSatsPushNotification */;
+			targetProxy = 961BBA642A5D2D3600EE36AE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		961BBA682A5D2D3600EE36AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SmartSatsPushNotification/SmartSatsPushNotification.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BJJ5WGNUJH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartSatsPushNotification/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SmartSatsPushNotification;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jasonvdb.SmartSats.SmartSatsPushNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		961BBA692A5D2D3600EE36AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SmartSatsPushNotification/SmartSatsPushNotification.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BJJ5WGNUJH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartSatsPushNotification/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SmartSatsPushNotification;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jasonvdb.SmartSats.SmartSatsPushNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		96EF6A332A5745EA00719F8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -343,6 +526,7 @@
 		96EF6A362A5745EA00719F8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SmartSats/SmartSats.entitlements;
@@ -353,6 +537,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartSats/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -361,12 +547,11 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jasonvdb.SmartSats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -381,6 +566,7 @@
 		96EF6A372A5745EA00719F8F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SmartSats/SmartSats.entitlements;
@@ -391,6 +577,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartSats/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -399,12 +587,11 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jasonvdb.SmartSats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -419,6 +606,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		961BBA6A2A5D2D3600EE36AE /* Build configuration list for PBXNativeTarget "SmartSatsPushNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				961BBA682A5D2D3600EE36AE /* Debug */,
+				961BBA692A5D2D3600EE36AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		96EF6A212A5745E800719F8F /* Build configuration list for PBXProject "SmartSats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -451,6 +647,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		96094A3D2A5E70D0004A4A62 /* BreezSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96158F232A589F4D0053C4DA /* XCRemoteSwiftPackageReference "breez-sdk-swift" */;
+			productName = BreezSDK;
+		};
 		96158F242A589F4D0053C4DA /* BreezSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 96158F232A589F4D0053C4DA /* XCRemoteSwiftPackageReference "breez-sdk-swift" */;

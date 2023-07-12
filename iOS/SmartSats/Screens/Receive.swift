@@ -21,10 +21,14 @@ struct Receive: View {
                     .padding()
             }
             
-            Text(invoice)
-                .multilineTextAlignment(.center)
-                .font(.footnote)
-                .padding()
+            Button {
+                UIPasteboard.general.string = invoice
+            } label: {
+                Text(invoice)
+                    .multilineTextAlignment(.center)
+                    .font(.footnote)
+                    .padding()
+            }
         }
     }
 }

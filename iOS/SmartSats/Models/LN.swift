@@ -34,6 +34,9 @@ enum LNErrors: Error {
     case missingSeed
     case missingStorage
     case missingCredentials
+    case missingApiKey
+    case missingMnumonic
+    case missingInviteCode
     case sdkNotSet
 }
 
@@ -44,8 +47,14 @@ extension LNErrors: LocalizedError {
             return NSLocalizedString("Missing auto generated seed", comment: "Seed failed to be fetched from keychain")
         case .missingStorage:
             return NSLocalizedString("Missing storage directory", comment: "Storage required for setting up SDK")
+        case .missingApiKey:
+            return NSLocalizedString("Missing API key", comment: "API key setting up SDK")
         case .missingCredentials:
             return NSLocalizedString("Missing greenlight credentials", comment: "Register or recover")
+        case .missingMnumonic:
+            return NSLocalizedString("Missing mnumonic", comment: "Mnumonic set in onboarding")
+        case .missingInviteCode:
+            return NSLocalizedString("Missing Greenlight invite code", comment: "Invite code set in onboarding")
         case .sdkNotSet:
             return NSLocalizedString("SDK not set (node not started)", comment: "User needs to start the node")
         }
@@ -59,10 +68,6 @@ class LN: ObservableObject {
     
     private var sdk: BlockingBreezServices?
     private let queue = DispatchQueue(label: "greenlight")
-
-    private let phrase = processInfo.environment["PHRASE"]!
-    private let apiKey = processInfo.environment["API_KEY"]!
-    private let inviteCode = processInfo.environment["INVITE_CODE"]!
 
     private let network: Network = .bitcoin
     
@@ -80,15 +85,20 @@ class LN: ObservableObject {
         }
         
         set {
-            if let cred = newValue {
-                KeyChain.save(key: .glDeviceCert, data: Data(cred.deviceCert))
-                KeyChain.save(key: .glDeviceKey, data: Data(cred.deviceKey))
+            do {
+                if let cred = newValue {
+                    try KeyChain.save(key: .glDeviceCert, data: Data(cred.deviceCert))
+                    try KeyChain.save(key: .glDeviceKey, data: Data(cred.deviceKey))
+                }
+            } catch {
+                print("FAILED TO SAVE TO KEYCHAIN")
+                fatalError(error.localizedDescription)
             }
         }
     }
     
     var hasNode: Bool {
-        greenlightCredentials != nil
+        greenlightCredentials != nil && cachedSeed != nil
     }
     
     private var cachedSeed: [UInt8]? {
@@ -108,7 +118,8 @@ class LN: ObservableObject {
     
     private lazy var storage: String? = {
         let fileManager = FileManager.default
-        guard let path = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first?.appending(path: "breez").path else {
+                
+        guard let path = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.smartsats")?.appendingPathComponent("breez").path else {
             return nil
         }
         
@@ -124,6 +135,23 @@ class LN: ObservableObject {
     }()
     
     private init() {
+        do {
+            if let mnumonic = processInfo.environment["PHRASE"] {
+                try KeyChain.saveStr(key: .mnumonic, str: mnumonic)
+            }
+            
+            if let apiKey = processInfo.environment["API_KEY"] {
+                try KeyChain.saveStr(key: .breezApiKey, str: apiKey)
+            }
+            
+            if let inviteCode = processInfo.environment["INVITE_CODE"] {
+                try KeyChain.saveStr(key: .glInviteCode, str: inviteCode)
+            }
+        } catch {
+            print("FAILED TO SAVE TO KEYCHAIN")
+            fatalError(error.localizedDescription)
+        }
+                
         queue.async {
             do {
                 try setLogStream(logStream: SDKLogs())
@@ -179,13 +207,22 @@ class LN: ObservableObject {
     
     func register() async throws {
         return try await background {
-            let seed = try mnemonicToSeed(phrase: self.phrase)
+            guard let mnemonic = KeyChain.loadString(key: .mnumonic) else {
+                throw LNErrors.missingMnumonic
+            }
+            
+            guard let inviteCode = KeyChain.loadString(key: .glInviteCode) else {
+                throw LNErrors.missingInviteCode
+            }
+            
+            let seed = try mnemonicToSeed(phrase: mnemonic)
+            try KeyChain.save(key: .nodeSeed, data: Data(seed))
             print("Registering node...")
             self.greenlightCredentials = try registerNode(
                 network: self.network,
                 seed: seed,
                 registerCredentials: nil,
-                inviteCode: self.inviteCode
+                inviteCode: inviteCode
             )
             print("Registered")
         }
@@ -194,7 +231,13 @@ class LN: ObservableObject {
     func recover() async throws {
         return try await background {
             print("Recovering...")
-            let seed = try mnemonicToSeed(phrase: self.phrase)
+            
+            guard let mnemonic = KeyChain.loadString(key: .mnumonic) else {
+                throw LNErrors.missingMnumonic
+            }
+            
+            let seed = try mnemonicToSeed(phrase: mnemonic)
+            try KeyChain.save(key: .nodeSeed, data: Data(seed))
             self.greenlightCredentials = try recoverNode(network: self.network, seed: seed)
             print("Recovered")
         }
@@ -212,10 +255,16 @@ class LN: ObservableObject {
         return try await background {
             var config = defaultConfig(envType: EnvironmentType.production)
             config.workingDir = storage
-            config.apiKey = self.apiKey
+            guard let apiKey = KeyChain.loadString(key: .breezApiKey) else {
+                throw LNErrors.missingApiKey
+            }
+            
+            config.apiKey = apiKey
             config.network = self.network
             
-            let seed = try mnemonicToSeed(phrase: self.phrase)
+            guard let seed = self.cachedSeed else {
+                throw LNErrors.missingSeed
+            }
             
             print("Initializing services...")
             self.sdk = try initServices(config: config, seed: seed, creds: greenlightCredentials, listener: SDKListener())
