@@ -80,37 +80,6 @@ struct SmartSatsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear {
-                    Task {
-                        do {
-                            print("***onForeground")
-                            try await ln.start()
-                        } catch {
-                            print("Failed to stop node")
-                        }
-                    }
-                }
-            //MARK: TODO figure out why these events get called randomly
-//                .onBackground {
-//                    Task {
-//                        do {
-//                            print("***onBackground")
-//                            try await ln.stop()
-//                        } catch {
-//                            print("Failed to stop node")
-//                        }
-//                    }
-//                }
-//                .onForeground {
-//                    Task {
-//                        do {
-//                            print("***onForeground")
-//                            try await ln.start()
-//                        } catch {
-//                            print("Failed to stop node")
-//                        }
-//                    }
-//                }
         }
     }
 }

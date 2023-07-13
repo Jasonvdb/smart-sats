@@ -5,11 +5,11 @@ Budgets for your agents
 - [x] Setup iOS app with Breez SDK
 - [x] Setup basic web dev agent for demo (builds a simple website)
 - [x] Web dev invoice charging
-- [ ] Push server Setup
-- [ ] Mobile payment from background
+- [x] Push server Setup
+- [x] Mobile payment from background
+- [x] Mobile background payment logic
+- [x] Setup LND node for receiving payments
 - [ ] Mobile budgeting logic
-- [ ] Mobile background payment logic
-- [ ] Setup LND node for receiving payments
 - [ ] Mobile UI
 - [ ] Demo UI
 - [ ] Deploy demo

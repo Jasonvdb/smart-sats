@@ -8,23 +8,24 @@ const { fancyGuid, createPushData } = require('./helpers');
 const push = new PushNotifications(pushSettings);
 const fancyDb = {}; //TODO persist
 
-let charge = {
-    sats: 123, //Sats sent through because we can't decode invoices yet
-    bolt11: 'lnbc1240n1pj2un9fpp56afscja0q395gk60r96wucl7upqkyh3qzfupdw774j9zhedjyh4sdqdw3jhxar9v4jk2cqzzsxqrrsssp55kahls20rk05cj0r5ltur2ud63290djvn87wf4vwzv78n6c89w6q9qyyssqmscu4u39lmypsq4ffxeadvzhfa8r6k5nylsp8chn6lsfw9mcmdlqw8r65nwrxjn7k8tgkra6acv5c8ecse2as6ra8gcv9k6pagdwt8sq22atwz',
-    auth: 'auth123'
-};
-push.send("9d337e92ce0c5b86915bd3cca5218e9f988268a4a74be6b279b09e95a8fcf66b", createPushData(charge))
-.then(res => {
-    console.log("Sent");
-    console.log(JSON.stringify(res));
-    process.exit(0);
-})
-.catch((error) => {
-    cno
-    console.error(error);
-    console.log(JSON.stringify(error));
-});
-return;
+const hardcodedpushtoken = "9d337e92ce0c5b86915bd3cca5218e9f988268a4a74be6b279b09e95a8fcf66b";
+
+// let charge = {
+//     sats: 123, //Sats sent through because we can't decode invoices yet
+//     bolt11: 'lnbc240n1pj2a9cjpp54452tkya5efclsy3809rd6etxy7kzaqfr2jz00jkvz8ujf59e84sdqdw3jhxar9v4jk2cqzzsxqrrsssp5x3cp8hcwupvds6h6m9y5hje9qv45wfkhlya7ry343vt359jwsjfq9qyyssqw23u6c2devc3y22mh7t5kdv3gjlxmnv79krhwhnfcgemxr2wtxmk9p82hq6xkx637fuqkgcsn4qwyh5fhugrssz4md09vpck3qv8rlcqqtrtxs',
+//     auth: 'auth123'
+// };
+// push.send(hardcodedpushtoken, createPushData(charge))
+// .then(res => {
+//     console.log("Sent");
+//     console.log(JSON.stringify(res));
+//     process.exit(0);
+// })
+// .catch((error) => {
+//     console.error(error);
+//     console.log(JSON.stringify(error));
+// });
+// return;
 
 const requestListener = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
@@ -47,32 +48,38 @@ const requestListener = (req, res) => {
 
     if (parts.pathname == "/revoke") {
         //TODO
+        res.writeHead(200);
+        res.end("TODO");
+        return;
     }
 
     //Called by agent
     if (parts.pathname == "/charge") {
-        const {amount, guid} = query;
+        const {sats, guid, bolt11} = query;
         let deviceToken = fancyDb[guid];
         if (!deviceToken) {
             console.log('guid not found in DB');
-            res.writeHead(404);
-            res.end(JSON.stringify({error: 'invalid token'}));
-            return;
+            // res.writeHead(404);
+            // res.end(JSON.stringify({error: 'invalid token'}));
+            // return;
+            //TODO remove
+            deviceToken = hardcodedpushtoken;
         }
 
-        const data = createPushData({
-            amount,
-            guid
-        });
+        let charge = {
+            sats: 123, //Sats sent through because we can't decode invoices yet
+            bolt11,
+            auth: 'auth123'
+        };
+
+        const data = createPushData(charge);
 
         push.send(deviceToken, data)
             .then((results) => { 
-                delete fancyDb[guid];
-
                 if (results[0].success) {
                     console.log('SENT!');
                     res.writeHead(200);
-                    res.end(JSON.stringify({result: 'notified', delay: 15000}));
+                    res.end(JSON.stringify({result: 'notified'}));
                     return;
                 }
 
@@ -88,6 +95,9 @@ const requestListener = (req, res) => {
         
         return;
     }
+
+    res.writeHead(404);
+    res.end("404 - Not found");
 };
 
 const server = http.createServer(requestListener);

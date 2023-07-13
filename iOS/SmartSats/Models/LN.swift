@@ -71,9 +71,10 @@ class LN: ObservableObject {
 
     private let network: Network = .bitcoin
     
+    @Published var synced = false
     @Published var nodeInfo: NodeState?
     @Published var payments: [Payment] = []
-    @Published var successfulPaymentIds: [String] = []
+    @Published var successfulPaymentsInThisSession: [Payment] = [] //For the background task if it's receiving multiple payments and we want a tally
 
     private var greenlightCredentials: GreenlightCredentials? {
         get {
@@ -122,7 +123,7 @@ class LN: ObservableObject {
         guard let path = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.smartsats")?.appendingPathComponent("breez").path else {
             return nil
         }
-        
+                
         if !fileManager.fileExists(atPath: path) {
             do {
                 try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
@@ -167,6 +168,7 @@ class LN: ObservableObject {
         DispatchQueue.main.async {
             switch e {
             case .synced:
+                self.synced = true
                 break
             case .newBlock(let block):
                 print(block)
@@ -187,7 +189,7 @@ class LN: ObservableObject {
             case .paymentSucceed(let details):
                 print("***SUCCCESS***")
                 print(details)
-                self.successfulPaymentIds.append(details.id)
+                self.successfulPaymentsInThisSession.append(details)
                 break
             }
             
@@ -252,6 +254,9 @@ class LN: ObservableObject {
             throw LNErrors.missingStorage
         }
         
+        print("Starting up...")
+        synced = false
+        
         return try await background {
             var config = defaultConfig(envType: EnvironmentType.production)
             config.workingDir = storage
@@ -269,7 +274,6 @@ class LN: ObservableObject {
             print("Initializing services...")
             self.sdk = try initServices(config: config, seed: seed, creds: greenlightCredentials, listener: SDKListener())
             
-            print("Starting node...")
             try self.sdk!.start()
             print("Started")
             
@@ -283,8 +287,10 @@ class LN: ObservableObject {
             print("Stopping node...")
             try self.sdk?.stop()
             self.sdk = nil
+            
             print("Stopped")
             self.syncUI()
+            self.synced = false
         }
     }
     

@@ -21,7 +21,7 @@ const createPushData = (payload) => {
         priority: 'high',
         contentAvailable: 1,
         mutableContent: 1,
-        badge: 1,
+        badge: 0,
         sound: 'ping.aiff',
     };
 };

@@ -56,8 +56,12 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "jasonvdb.SmartSats"
+         RemotePath = "/var/containers/Bundle/Application/89316F8A-1547-4CE9-A296-3B8603AACE17/SmartSats.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EF6A252A5745E800719F8F"
@@ -65,7 +69,7 @@
             BlueprintName = "SmartSats"
             ReferencedContainer = "container:SmartSats.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

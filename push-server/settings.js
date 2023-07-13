@@ -1,5 +1,5 @@
-const host = '192.168.0.105';
-const port = 8000;
+const host = '192.168.1.108';
+const port = 8765;
 
 const pushSettings = {
     apn: {

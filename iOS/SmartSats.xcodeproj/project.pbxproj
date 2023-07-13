@@ -13,6 +13,8 @@
 		96094A422A5E73C3004A4A62 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A412A5E73C3004A4A62 /* Charge.swift */; };
 		96094A432A5E7539004A4A62 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A412A5E73C3004A4A62 /* Charge.swift */; };
 		96094A442A5E7D47004A4A62 /* UInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2B2A58A06D0053C4DA /* UInt64.swift */; };
+		96094A462A5EB13C004A4A62 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A452A5EB13C004A4A62 /* Payment.swift */; };
+		96094A482A5ECF19004A4A62 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A472A5ECF19004A4A62 /* Transaction.swift */; };
 		96158F222A589F300053C4DA /* LN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F212A589F300053C4DA /* LN.swift */; };
 		96158F252A589F4D0053C4DA /* BreezSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 96158F242A589F4D0053C4DA /* BreezSDK */; };
 		96158F272A589F8F0053C4DA /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F262A589F8F0053C4DA /* KeyChain.swift */; };
@@ -57,6 +59,8 @@
 
 /* Begin PBXFileReference section */
 		96094A412A5E73C3004A4A62 /* Charge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charge.swift; sourceTree = "<group>"; };
+		96094A452A5EB13C004A4A62 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		96094A472A5ECF19004A4A62 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		96158F212A589F300053C4DA /* LN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LN.swift; sourceTree = "<group>"; };
 		96158F262A589F8F0053C4DA /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		96158F292A58A0230053C4DA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 				96158F2B2A58A06D0053C4DA /* UInt64.swift */,
 				96158F372A5B26070053C4DA /* UIScreen.swift */,
 				96158F352A5B24710053C4DA /* String.swift */,
+				96094A452A5EB13C004A4A62 /* Payment.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				96158F332A5B225E0053C4DA /* Receive.swift */,
+				96094A472A5ECF19004A4A62 /* Transaction.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96094A482A5ECF19004A4A62 /* Transaction.swift in Sources */,
 				96158F342A5B225E0053C4DA /* Receive.swift in Sources */,
 				96094A422A5E73C3004A4A62 /* Charge.swift in Sources */,
 				96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */,
@@ -335,6 +342,7 @@
 				96158F272A589F8F0053C4DA /* KeyChain.swift in Sources */,
 				96158F2A2A58A0230053C4DA /* View.swift in Sources */,
 				96158F382A5B26070053C4DA /* UIScreen.swift in Sources */,
+				96094A462A5EB13C004A4A62 /* Payment.swift in Sources */,
 				96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */,
 				96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */,
 				96158F362A5B24710053C4DA /* String.swift in Sources */,

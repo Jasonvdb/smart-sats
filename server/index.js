@@ -35,6 +35,9 @@ const corsPolicy = {
     }
 };
 
+// chargeUser(25); //TODO remove
+// return;
+
 const io = require('socket.io')(server, corsPolicy);
 
 const configuration = new Configuration({
@@ -56,7 +59,7 @@ const systemPrompt = "You are an expert web developer. " +
         "Use local browser storage to persist any data if required.";
 
 let defaultMessages = [
-{"role": "system", "content": systemPrompt},
+    {"role": "system", "content": systemPrompt},
 ];
 
 const modelDetails = {
@@ -74,22 +77,21 @@ io.on('connection', async (socket) => {
     console.log('A user connected');
 
     socket.on('prompt', async (prompt) => {
-        console.log(`Received prompt: ${prompt}`);
+        try {   
+            console.log(`Received prompt: ${prompt}`);
 
-        socket.emit('progress_response', "Request received 👀");
+            socket.emit('progress_response', "Request received 👀");
 
-        const htmlCost = 20;
-        socket.emit('progress_response', "Charging user " + htmlCost + " sats 💰 (for html generation)");
-        const paid = await chargeUser(htmlCost);
-        // if (!paid) {
-        //     socket.emit('progress_response', "Payment not received. Aborting... ❌");
-        //     socket.emit('code_response', '[ERROR]');
-        //     return;
-        // }
+            const htmlCost = 20;
+            socket.emit('progress_response', "Charging user " + htmlCost + " sats 💰 (for html generation)");
+            if (!(await chargeUser(htmlCost, "HTML generation"))) {
+                socket.emit('progress_response', "Payment not received. Aborting... ❌");
+                socket.emit('code_response', '[ERROR]');
+                return;
+            }
 
-        socket.emit('progress_response', "Payment received! 🤑");
-        
-        try {            
+            socket.emit('progress_response', "Payment received! 🤑");
+                    
             console.log("Making request");
 
             socket.emit('progress_response', "Thinking... 🤔");
@@ -121,7 +123,11 @@ io.on('connection', async (socket) => {
 
                         const imageCost = 30;
                         socket.emit('progress_response', "Charging user " + imageCost + " sats 💰 (for image generation)");
-                        await chargeUser(imageCost);
+                        if (!(await chargeUser(imageCost, "Image generation"))) {
+                            socket.emit('progress_response', "Payment not received. Aborting... ❌");
+                            socket.emit('code_response', '[ERROR]');
+                            return;
+                        }
 
                         socket.emit('progress_response', "Payment received! 🤑 Generating image...");
 
@@ -172,7 +178,10 @@ io.on('connection', async (socket) => {
                     }
                 });
             } else {
-                console.error('An error occurred during OpenAI request', error);
+                const errorMessage = 'An error occurred' + error
+                socket.emit('progress_response', errorMessage);
+
+                console.error(errorMessage);
             }
         }
     });

@@ -82,16 +82,16 @@ lnService.getChannels({lnd}, (err, result) => {
     });
 });
 
-async function chargeUser(amount) {
-    const timeout = 5;
-    //Convert to async await
+async function chargeUser(sats, description) {
+    const timeout = 30;
+
     const result = await new Promise((resolve, reject) => {
         lnService.createInvoice({
             lnd,
-            tokens: amount,
-            description: 'testeeee',
+            tokens: sats,
+            description,
             is_including_private_channels: false,
-            expires_at: new Date(Date.now() + 60 * 60 * 1000).toISOString()
+            expires_at: new Date(Date.now() + timeout * 1000).toISOString() //Must timeout so user doesn't pay after we give up
         }, (err, result) => {
             if (err) {
             reject(err);
@@ -106,9 +106,9 @@ async function chargeUser(amount) {
     //TODO check if payment was made
     const sub = lnService.subscribeToInvoice({id, lnd}).addListener('invoice_updated', async (invoice) => {
         const {received} = invoice;
-        if (received == amount) {
+        if (received == sats) {
             paid = true;
-            console.log("INVOICE PAID");
+            console.log("INVOICE PAID ✅");
             sub.removeAllListeners();
             return;
         }
@@ -117,7 +117,18 @@ async function chargeUser(amount) {
     //TODO send to user
     console.log("TODO pay this:");
     console.log(bolt11);
-        
+
+    fetch(
+		'http://192.168.1.108:8765/charge?bolt11=' + bolt11,
+		{
+			headers: { Authorization: "Bearer " + "TODO" },
+			method: "POST",
+			body: JSON.stringify({}), //TODO add to body rather than query
+		}
+	).catch((error) => {
+        throw new Error("Error sending push notification request");
+    });
+
     for (let i = 0; i < timeout; i++) {
         if (paid) {
             break;

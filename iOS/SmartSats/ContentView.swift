@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import BreezSDK
 
 struct ContentView: View {
+    @Environment(\.scenePhase) var scenePhase
     @ObservedObject var ln = LN.shared
     @State var displayError = ""
     @State var message = ""
@@ -15,19 +17,25 @@ struct ContentView: View {
     @State var receiveInvoice = ""
     @State var showReceive = false
     
+    @State var showTransaction = false
+    @State var selectedPayment: Payment = dummyPayment
+
     var body: some View {
         VStack {
             if let info = ln.nodeInfo {
                 Text("Block height: \(info.blockHeight)")
                 Text("Channel balance: \(info.channelsBalanceMsat.sats)")
                 Text("Onchain balance: \(info.onchainBalanceMsat.sats)")
-                Text("Peers: \(info.connectedPeers.joined(separator: ", "))")
+                Text("Synced: \(ln.synced ? "✅" : "⏳")")
             }
             
-            Text(displayError).foregroundColor(.red).font(.footnote)
-            Text(message).foregroundColor(.green)
-            Text("Payments: \(ln.successfulPaymentIds.count)")
-
+            Text(displayError)
+                .foregroundColor(.red)
+                .font(.footnote)
+            Text(message)
+                .foregroundColor(.green)
+            Text("Revent payments: \($ln.successfulPaymentsInThisSession.count)")
+            
             if !ln.hasNode {
                 AsyncButton(title: "Register node") {
                     displayError = ""
@@ -104,17 +112,49 @@ struct ContentView: View {
         .padding()
         
         List(ln.payments, id: \.self) { payment in
-            let type = payment.paymentType == .sent ? "Sent" : "Received"
-            
             HStack {
-                Text(type)
+                VStack(alignment: .leading) {
+                    Text(payment.displayType)
+                    Text(payment.description ?? "")
+                        .font(.caption)
+                }
                 Spacer()
-                Text("\(payment.amountMsat.sats)")
+                VStack(alignment: .trailing) {
+                    Text("\(payment.amountMsat.sats)")
+                    Text("\(payment.displayTime)")
+                        .font(.caption2)
+                }
+            }
+            .onTapGesture {
+                selectedPayment = payment
+                showTransaction = true
             }
         }
         .sheet(isPresented: $showReceive, content: {
             Receive(invoice: $receiveInvoice)
         })
+        .sheet(isPresented: $showTransaction, content: {
+            Transaction(payment: $selectedPayment)
+        })
+        .onChange(of: scenePhase) { newPhase in
+            Task {
+                do {
+                    guard ln.hasNode else {
+                        return
+                    }
+                    
+                    if newPhase == .inactive {
+                        try await ln.stop()
+                    } else if newPhase == .active {
+                        try await ln.start()
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+            
+        }
     }
 }
 

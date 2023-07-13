@@ -75,8 +75,7 @@ class KeyChain {
         let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
         
         if status == noErr {
-            print(key.rawValue + " loaded")
-
+            print(key.rawValue + " loaded from keychain")
             return dataTypeRef as! Data?
         } else {
             print(key.rawValue + " ERROR " + status.description)

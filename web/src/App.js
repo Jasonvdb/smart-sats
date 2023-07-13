@@ -72,6 +72,7 @@ const App = () => {
 
   const handlePromptSubmit = async () => {
     setResponse('');
+    setStatus("Requesting... ⏳");
     setIsReady(false);
     setProgressUpdates([]);
     socket.emit('prompt', prompt);
