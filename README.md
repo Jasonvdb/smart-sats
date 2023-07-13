@@ -9,6 +9,8 @@ Budgets for your agents
 - [x] Mobile payment from background
 - [x] Mobile background payment logic
 - [x] Setup LND node for receiving payments
+- [ ] Push server auth
+- [ ] Server budgeting logic
 - [ ] Mobile budgeting logic
 - [ ] Mobile UI
 - [ ] Demo UI
