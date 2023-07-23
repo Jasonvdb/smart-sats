@@ -8,7 +8,7 @@
 import SwiftUI
 import BreezSDK
 
-struct Transaction: View {
+struct TransactionView: View {
     @Binding var payment: Payment
     
     var body: some View {
@@ -25,9 +25,9 @@ struct Transaction: View {
     }
 }
 
-struct Transaction_Previews: PreviewProvider {
+struct TransactionView_Previews: PreviewProvider {
     static var previews: some View {
-        Transaction(payment: .constant(dummyPayment))
+        TransactionView(payment: .constant(dummyPayment))
     }
 }
 

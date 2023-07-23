@@ -14,7 +14,7 @@
 		96094A432A5E7539004A4A62 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A412A5E73C3004A4A62 /* Charge.swift */; };
 		96094A442A5E7D47004A4A62 /* UInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2B2A58A06D0053C4DA /* UInt64.swift */; };
 		96094A462A5EB13C004A4A62 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A452A5EB13C004A4A62 /* Payment.swift */; };
-		96094A482A5ECF19004A4A62 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A472A5ECF19004A4A62 /* Transaction.swift */; };
+		96094A482A5ECF19004A4A62 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96094A472A5ECF19004A4A62 /* TransactionView.swift */; };
 		96158F222A589F300053C4DA /* LN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F212A589F300053C4DA /* LN.swift */; };
 		96158F252A589F4D0053C4DA /* BreezSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 96158F242A589F4D0053C4DA /* BreezSDK */; };
 		96158F272A589F8F0053C4DA /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F262A589F8F0053C4DA /* KeyChain.swift */; };
@@ -22,11 +22,23 @@
 		96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2B2A58A06D0053C4DA /* UInt64.swift */; };
 		96158F2F2A58A1020053C4DA /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F2E2A58A1020053C4DA /* AsyncButton.swift */; };
 		96158F312A5B1D610053C4DA /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F302A5B1D610053C4DA /* Clipboard.swift */; };
-		96158F342A5B225E0053C4DA /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F332A5B225E0053C4DA /* Receive.swift */; };
+		96158F342A5B225E0053C4DA /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F332A5B225E0053C4DA /* ReceiveView.swift */; };
 		96158F362A5B24710053C4DA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F352A5B24710053C4DA /* String.swift */; };
 		96158F382A5B26070053C4DA /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F372A5B26070053C4DA /* UIScreen.swift */; };
 		961BBA622A5D2D3600EE36AE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BBA612A5D2D3600EE36AE /* NotificationService.swift */; };
 		961BBA662A5D2D3600EE36AE /* SmartSatsPushNotification.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		96B4F3732A6D5079008FD347 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3722A6D5079008FD347 /* DebugView.swift */; };
+		96B4F3752A6D52EA008FD347 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3742A6D52EA008FD347 /* HomeView.swift */; };
+		96B4F3772A6D5435008FD347 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3762A6D5435008FD347 /* ViewModel.swift */; };
+		96B4F3792A6D5495008FD347 /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3782A6D5495008FD347 /* PreferenceKey.swift */; };
+		96B4F37B2A6D54E8008FD347 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37A2A6D54E8008FD347 /* Color.swift */; };
+		96B4F37D2A6D59E4008FD347 /* WalletSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37C2A6D59E4008FD347 /* WalletSummaryCard.swift */; };
+		96B4F37F2A6D5A13008FD347 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37E2A6D5A13008FD347 /* Modifiers.swift */; };
+		96B4F3812A6D5EE7008FD347 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3802A6D5EE7008FD347 /* CustomIcon.swift */; };
+		96B4F3852A6D69E0008FD347 /* TransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3842A6D69E0008FD347 /* TransactionList.swift */; };
+		96B4F3872A6D8186008FD347 /* TxListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3862A6D8186008FD347 /* TxListItem.swift */; };
+		96B4F3892A6D967F008FD347 /* AgentSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */; };
+		96B4F38B2A6D97C4008FD347 /* Agents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38A2A6D97C4008FD347 /* Agents.swift */; };
 		96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A292A5745E800719F8F /* SmartSatsApp.swift */; };
 		96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A2B2A5745E800719F8F /* ContentView.swift */; };
 		96EF6A2E2A5745EA00719F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EF6A2D2A5745EA00719F8F /* Assets.xcassets */; };
@@ -60,14 +72,14 @@
 /* Begin PBXFileReference section */
 		96094A412A5E73C3004A4A62 /* Charge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charge.swift; sourceTree = "<group>"; };
 		96094A452A5EB13C004A4A62 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
-		96094A472A5ECF19004A4A62 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		96094A472A5ECF19004A4A62 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		96158F212A589F300053C4DA /* LN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LN.swift; sourceTree = "<group>"; };
 		96158F262A589F8F0053C4DA /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		96158F292A58A0230053C4DA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		96158F2B2A58A06D0053C4DA /* UInt64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UInt64.swift; sourceTree = "<group>"; };
 		96158F2E2A58A1020053C4DA /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		96158F302A5B1D610053C4DA /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
-		96158F332A5B225E0053C4DA /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
+		96158F332A5B225E0053C4DA /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		96158F352A5B24710053C4DA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		96158F372A5B26070053C4DA /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SmartSatsPushNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +87,18 @@
 		961BBA632A5D2D3600EE36AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		961BBA6B2A5D2D4F00EE36AE /* SmartSatsPushNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSatsPushNotification.entitlements; sourceTree = "<group>"; };
 		961BBA6C2A5D3AFA00EE36AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		96B4F3722A6D5079008FD347 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		96B4F3742A6D52EA008FD347 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		96B4F3762A6D5435008FD347 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		96B4F3782A6D5495008FD347 /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
+		96B4F37A2A6D54E8008FD347 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		96B4F37C2A6D59E4008FD347 /* WalletSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSummaryCard.swift; sourceTree = "<group>"; };
+		96B4F37E2A6D5A13008FD347 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		96B4F3802A6D5EE7008FD347 /* CustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
+		96B4F3842A6D69E0008FD347 /* TransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionList.swift; sourceTree = "<group>"; };
+		96B4F3862A6D8186008FD347 /* TxListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxListItem.swift; sourceTree = "<group>"; };
+		96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSummaryCard.swift; sourceTree = "<group>"; };
+		96B4F38A2A6D97C4008FD347 /* Agents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agents.swift; sourceTree = "<group>"; };
 		96EF6A262A5745E800719F8F /* SmartSats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EF6A292A5745E800719F8F /* SmartSatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSatsApp.swift; sourceTree = "<group>"; };
 		96EF6A2B2A5745E800719F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +132,8 @@
 			children = (
 				96158F212A589F300053C4DA /* LN.swift */,
 				96094A412A5E73C3004A4A62 /* Charge.swift */,
+				96B4F3762A6D5435008FD347 /* ViewModel.swift */,
+				96B4F38A2A6D97C4008FD347 /* Agents.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,6 +143,8 @@
 			children = (
 				96158F262A589F8F0053C4DA /* KeyChain.swift */,
 				96158F302A5B1D610053C4DA /* Clipboard.swift */,
+				96B4F3782A6D5495008FD347 /* PreferenceKey.swift */,
+				96B4F37E2A6D5A13008FD347 /* Modifiers.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -129,6 +157,7 @@
 				96158F372A5B26070053C4DA /* UIScreen.swift */,
 				96158F352A5B24710053C4DA /* String.swift */,
 				96094A452A5EB13C004A4A62 /* Payment.swift */,
+				96B4F37A2A6D54E8008FD347 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -137,6 +166,11 @@
 			isa = PBXGroup;
 			children = (
 				96158F2E2A58A1020053C4DA /* AsyncButton.swift */,
+				96B4F37C2A6D59E4008FD347 /* WalletSummaryCard.swift */,
+				96B4F3802A6D5EE7008FD347 /* CustomIcon.swift */,
+				96B4F3842A6D69E0008FD347 /* TransactionList.swift */,
+				96B4F3862A6D8186008FD347 /* TxListItem.swift */,
+				96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -144,8 +178,10 @@
 		96158F322A5B22500053C4DA /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				96158F332A5B225E0053C4DA /* Receive.swift */,
-				96094A472A5ECF19004A4A62 /* Transaction.swift */,
+				96B4F3742A6D52EA008FD347 /* HomeView.swift */,
+				96158F332A5B225E0053C4DA /* ReceiveView.swift */,
+				96094A472A5ECF19004A4A62 /* TransactionView.swift */,
+				96B4F3722A6D5079008FD347 /* DebugView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -333,20 +369,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96094A482A5ECF19004A4A62 /* Transaction.swift in Sources */,
-				96158F342A5B225E0053C4DA /* Receive.swift in Sources */,
+				96B4F3792A6D5495008FD347 /* PreferenceKey.swift in Sources */,
+				96094A482A5ECF19004A4A62 /* TransactionView.swift in Sources */,
+				96B4F3892A6D967F008FD347 /* AgentSummaryCard.swift in Sources */,
+				96B4F3732A6D5079008FD347 /* DebugView.swift in Sources */,
+				96158F342A5B225E0053C4DA /* ReceiveView.swift in Sources */,
 				96094A422A5E73C3004A4A62 /* Charge.swift in Sources */,
 				96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */,
 				96158F2F2A58A1020053C4DA /* AsyncButton.swift in Sources */,
+				96B4F3772A6D5435008FD347 /* ViewModel.swift in Sources */,
+				96B4F38B2A6D97C4008FD347 /* Agents.swift in Sources */,
 				96158F312A5B1D610053C4DA /* Clipboard.swift in Sources */,
+				96B4F3852A6D69E0008FD347 /* TransactionList.swift in Sources */,
+				96B4F3812A6D5EE7008FD347 /* CustomIcon.swift in Sources */,
 				96158F272A589F8F0053C4DA /* KeyChain.swift in Sources */,
 				96158F2A2A58A0230053C4DA /* View.swift in Sources */,
+				96B4F37B2A6D54E8008FD347 /* Color.swift in Sources */,
+				96B4F3872A6D8186008FD347 /* TxListItem.swift in Sources */,
 				96158F382A5B26070053C4DA /* UIScreen.swift in Sources */,
 				96094A462A5EB13C004A4A62 /* Payment.swift in Sources */,
 				96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */,
 				96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */,
+				96B4F37F2A6D5A13008FD347 /* Modifiers.swift in Sources */,
+				96B4F3752A6D52EA008FD347 /* HomeView.swift in Sources */,
 				96158F362A5B24710053C4DA /* String.swift in Sources */,
 				96158F222A589F300053C4DA /* LN.swift in Sources */,
+				96B4F37D2A6D59E4008FD347 /* WalletSummaryCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
