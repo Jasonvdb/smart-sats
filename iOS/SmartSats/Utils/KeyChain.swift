@@ -16,33 +16,39 @@ class KeyChain {
     private static let group = "BJJ5WGNUJH.jasonvdb.smartsats"
     
     enum KeyChainKey: String {
-        case glDeviceCert = "gl-device-cert"
-        case glDeviceKey = "gl-device-key"
-        case nodeSeed = "node-seed"
+        case glDeviceCert = "gl-device-cert2"
+        case glDeviceKey = "gl-device-key2"
+        case nodeSeed = "node-seed2"
         
         //Saved in onboarding
-        case breezApiKey = "breez-api-key"
-        case glInviteCode = "gl-invite-code"
-        case mnumonic = "mnumonic"
+        case breezApiKey = "breez-api-key2"
+        case glInviteCode = "gl-invite-code2"
+        case mnumonic = "mnumonic2"
     }
     
     class func save(key: KeyChainKey, data: Data) throws {
+        print(key.rawValue)
+
         let query = [
             kSecClass as String: kSecClassGenericPassword as String,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock as String,
             kSecAttrAccount as String: key.rawValue,
             kSecValueData as String: data,
             kSecAttrAccessGroup as String: Self.group
         ] as [String : Any]
         
-        SecItemDelete(query as CFDictionary)
+        let deleteStatus = SecItemDelete(query as CFDictionary)
+        print("DELETE STATUS: \(deleteStatus)")
         let status = SecItemAdd(query as CFDictionary, nil)
+        
+        print("SAVE STATUS \(status)")
         
         if status != noErr {
             throw KeyChainErrors.failedToSave
         }
     }
     
-    class func saveStr(key: KeyChainKey, str: String) throws {
+    class func saveString(key: KeyChainKey, str: String) throws {
         guard let data = str.data(using: .utf8) else {
             throw KeyChainErrors.failedToSave
         }
@@ -97,6 +103,8 @@ class KeyChain {
         delete(key: .glDeviceCert)
         delete(key: .glDeviceKey)
         delete(key: .nodeSeed)
+        delete(key: .mnumonic)
+        delete(key: .breezApiKey)
         #else
         print("Debug only")
         #endif

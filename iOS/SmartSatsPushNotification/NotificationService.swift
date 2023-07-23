@@ -34,7 +34,8 @@ class NotificationService: UNNotificationServiceExtension {
                 
                 let charge = try Charge(aps: aps)
                 
-                try await ln.start()
+                try await ln.connect()
+//                try await ln.sync()
                 
                 //TODO check if it's been paid before
         
@@ -77,10 +78,6 @@ class NotificationService: UNNotificationServiceExtension {
     }
     
     func deliver() {
-        Task {
-            try? await ln.stop()
-        }
-        
         if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
             if let title = self.title {
                 bestAttemptContent.title = title

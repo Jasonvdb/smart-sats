@@ -138,15 +138,15 @@ class LN: ObservableObject {
     private init() {
         do {
             if let mnumonic = processInfo.environment["PHRASE"] {
-                try KeyChain.saveStr(key: .mnumonic, str: mnumonic)
+                try KeyChain.saveString(key: .mnumonic, str: mnumonic)
             }
             
             if let apiKey = processInfo.environment["API_KEY"] {
-                try KeyChain.saveStr(key: .breezApiKey, str: apiKey)
+                try KeyChain.saveString(key: .breezApiKey, str: apiKey)
             }
             
             if let inviteCode = processInfo.environment["INVITE_CODE"] {
-                try KeyChain.saveStr(key: .glInviteCode, str: inviteCode)
+                try KeyChain.saveString(key: .glInviteCode, str: inviteCode)
             }
         } catch {
             print("FAILED TO SAVE TO KEYCHAIN")
@@ -207,45 +207,7 @@ class LN: ObservableObject {
         }
     }
     
-    func register() async throws {
-        return try await background {
-            guard let mnemonic = KeyChain.loadString(key: .mnumonic) else {
-                throw LNErrors.missingMnumonic
-            }
-            
-            guard let inviteCode = KeyChain.loadString(key: .glInviteCode) else {
-                throw LNErrors.missingInviteCode
-            }
-            
-            let seed = try mnemonicToSeed(phrase: mnemonic)
-            try KeyChain.save(key: .nodeSeed, data: Data(seed))
-            print("Registering node...")
-            self.greenlightCredentials = try registerNode(
-                network: self.network,
-                seed: seed,
-                registerCredentials: nil,
-                inviteCode: inviteCode
-            )
-            print("Registered")
-        }
-    }
-    
-    func recover() async throws {
-        return try await background {
-            print("Recovering...")
-            
-            guard let mnemonic = KeyChain.loadString(key: .mnumonic) else {
-                throw LNErrors.missingMnumonic
-            }
-            
-            let seed = try mnemonicToSeed(phrase: mnemonic)
-            try KeyChain.save(key: .nodeSeed, data: Data(seed))
-            self.greenlightCredentials = try recoverNode(network: self.network, seed: seed)
-            print("Recovered")
-        }
-    }
-    
-    func start() async throws {
+    func connect() async throws {
         guard let greenlightCredentials else {
             throw LNErrors.missingCredentials
         }
@@ -254,53 +216,53 @@ class LN: ObservableObject {
             throw LNErrors.missingStorage
         }
         
-        print("Starting up...")
-        synced = false
-        
-        return try await background {
-            var config = defaultConfig(envType: EnvironmentType.production)
-            config.workingDir = storage
-            guard let apiKey = KeyChain.loadString(key: .breezApiKey) else {
-                throw LNErrors.missingApiKey
-            }
-            
-            config.apiKey = apiKey
-            config.network = self.network
-            
-            guard let seed = self.cachedSeed else {
-                throw LNErrors.missingSeed
-            }
-            
-            print("Initializing services...")
-            self.sdk = try initServices(config: config, seed: seed, creds: greenlightCredentials, listener: SDKListener())
-            
-            try self.sdk!.start()
-            print("Started")
-            
-            self.syncUI()
+        guard let seed = self.cachedSeed else {
+            throw LNErrors.missingSeed
         }
-    }
-    
-    func stop() async throws {
-        guard sdk != nil else { return }
-        return try await background {
-            print("Stopping node...")
-            try self.sdk?.stop()
-            self.sdk = nil
-            
-            print("Stopped")
-            self.syncUI()
+        
+        guard let inviteCode = KeyChain.loadString(key: .glInviteCode) else {
+            throw LNErrors.missingInviteCode
+        }
+        
+        guard let apiKey = KeyChain.loadString(key: .breezApiKey) else {
+            throw LNErrors.missingApiKey
+        }
+        
+        DispatchQueue.main.async {
             self.synced = false
         }
+        return try await background {
+            var config = defaultConfig(
+                envType: EnvironmentType.production,
+                apiKey: apiKey,
+                nodeConfig: .greenlight(config: .init(partnerCredentials: greenlightCredentials, inviteCode: inviteCode))
+            )
+            config.workingDir = storage
+            
+            print("Connecting...")
+            self.sdk = try BreezSDK.connect(config: config, seed: seed, listener: SDKListener());
+            print("Connected")
+            self.syncUI()
+        }
     }
     
-//    func sync() async throws {
-//        guard let sdk else { throw LNErrors.sdkNotSet }
-//
-//        return try await background {
-//            try sdk.sync()
-//        }
-//    }
+    func sync() async throws {
+        guard sdk != nil else { return }
+        DispatchQueue.main.async {
+            self.synced = false
+        }
+        
+        return try await background {
+            print("Syncing...")
+            try self.sdk?.sync()
+            print("Synced")
+            self.syncUI()
+            
+            DispatchQueue.main.async {
+                self.synced = true
+            }
+        }
+    }
     
     func receive(amountSats: UInt64, description: String) async throws -> LnInvoice {
         guard let sdk else { throw LNErrors.sdkNotSet }
@@ -335,9 +297,26 @@ class LN: ObservableObject {
                     continuation.resume(with: .success(res))
                 } catch let sdkError as SdkError {
                     switch sdkError as SdkError {
-                    case .Error(let message):
+                    case .Generic(let message):
                         print("SdkError: \(message)")
                         continuation.resume(throwing: SdkDisplayError(message: message))
+                        break;
+                    case .InitFailed(let message):
+                        print("SdkError: \(message)")
+                        continuation.resume(throwing: SdkDisplayError(message: message))
+                        break;
+                    case .LspConnectFailed(let message):
+                        print("SdkError: \(message)")
+                        continuation.resume(throwing: SdkDisplayError(message: message))
+                        break;
+                    case .PersistenceFailure(let message):
+                        print("SdkError: \(message)")
+                        continuation.resume(throwing: SdkDisplayError(message: message))
+                        break;
+                    case .ReceivePaymentFailed(let message):
+                        print("SdkError: \(message)")
+                        continuation.resume(throwing: SdkDisplayError(message: message))
+                        break;
                     }
                 } catch {
                     continuation.resume(throwing: error)

@@ -16,6 +16,15 @@ extension Payment {
         return dateFormatter.string(from: date)
     }
     
+    var lnData: LnPaymentDetails? {
+        switch details {
+        case .ln(let data):
+            return data
+        case .closedChannel(_):
+            return nil
+        }
+    }
+    
     var displayType: String {
         switch paymentType {
         case .closedChannel:

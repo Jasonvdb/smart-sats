@@ -37,23 +37,11 @@ struct ContentView: View {
             Text("Revent payments: \($ln.successfulPaymentsInThisSession.count)")
             
             if !ln.hasNode {
-                AsyncButton(title: "Register node") {
+                AsyncButton(title: "Connect node") {
                     displayError = ""
                     do {
-                        try await ln.register()
-                        try await ln.start()
+                        try await ln.connect()
                         message = "Node registered"
-                    } catch  {
-                        displayError = error.localizedDescription
-                    }
-                }
-                
-                AsyncButton(title: "Recover node") {
-                    displayError = ""
-                    do {
-                        try await ln.recover()
-                        try await ln.start()
-                        message = "Node recovered"
                     } catch  {
                         displayError = error.localizedDescription
                     }
@@ -114,7 +102,7 @@ struct ContentView: View {
         List(ln.payments, id: \.self) { payment in
             HStack {
                 VStack(alignment: .leading) {
-                    Text(payment.displayType)
+                    Text("\(payment.displayType) \(payment.pending ? "⏳" : "")")
                     Text(payment.description ?? "")
                         .font(.caption)
                 }
@@ -143,10 +131,8 @@ struct ContentView: View {
                         return
                     }
                     
-                    if newPhase == .inactive {
-                        try await ln.stop()
-                    } else if newPhase == .active {
-                        try await ln.start()
+                    if newPhase == .active {
+                        try await ln.connect()
                     }
                 } catch {
                     print(error.localizedDescription)
