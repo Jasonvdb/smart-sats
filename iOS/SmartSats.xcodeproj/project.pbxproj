@@ -32,13 +32,16 @@
 		96B4F3772A6D5435008FD347 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3762A6D5435008FD347 /* ViewModel.swift */; };
 		96B4F3792A6D5495008FD347 /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3782A6D5495008FD347 /* PreferenceKey.swift */; };
 		96B4F37B2A6D54E8008FD347 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37A2A6D54E8008FD347 /* Color.swift */; };
-		96B4F37D2A6D59E4008FD347 /* WalletSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37C2A6D59E4008FD347 /* WalletSummaryCard.swift */; };
+		96B4F37D2A6D59E4008FD347 /* BalanceSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37C2A6D59E4008FD347 /* BalanceSummaryCard.swift */; };
 		96B4F37F2A6D5A13008FD347 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F37E2A6D5A13008FD347 /* Modifiers.swift */; };
 		96B4F3812A6D5EE7008FD347 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3802A6D5EE7008FD347 /* CustomIcon.swift */; };
 		96B4F3852A6D69E0008FD347 /* TransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3842A6D69E0008FD347 /* TransactionList.swift */; };
 		96B4F3872A6D8186008FD347 /* TxListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3862A6D8186008FD347 /* TxListItem.swift */; };
 		96B4F3892A6D967F008FD347 /* AgentSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */; };
 		96B4F38B2A6D97C4008FD347 /* Agents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38A2A6D97C4008FD347 /* Agents.swift */; };
+		96B4F38D2A6EF708008FD347 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38C2A6EF708008FD347 /* FloatingButton.swift */; };
+		96B4F38F2A6F02A6008FD347 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38E2A6F02A6008FD347 /* ScannerView.swift */; };
+		96B4F3922A6F0383008FD347 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 96B4F3912A6F0383008FD347 /* CodeScanner */; };
 		96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A292A5745E800719F8F /* SmartSatsApp.swift */; };
 		96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A2B2A5745E800719F8F /* ContentView.swift */; };
 		96EF6A2E2A5745EA00719F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EF6A2D2A5745EA00719F8F /* Assets.xcassets */; };
@@ -92,13 +95,15 @@
 		96B4F3762A6D5435008FD347 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		96B4F3782A6D5495008FD347 /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		96B4F37A2A6D54E8008FD347 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		96B4F37C2A6D59E4008FD347 /* WalletSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSummaryCard.swift; sourceTree = "<group>"; };
+		96B4F37C2A6D59E4008FD347 /* BalanceSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSummaryCard.swift; sourceTree = "<group>"; };
 		96B4F37E2A6D5A13008FD347 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		96B4F3802A6D5EE7008FD347 /* CustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
 		96B4F3842A6D69E0008FD347 /* TransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionList.swift; sourceTree = "<group>"; };
 		96B4F3862A6D8186008FD347 /* TxListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxListItem.swift; sourceTree = "<group>"; };
 		96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSummaryCard.swift; sourceTree = "<group>"; };
 		96B4F38A2A6D97C4008FD347 /* Agents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agents.swift; sourceTree = "<group>"; };
+		96B4F38C2A6EF708008FD347 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		96B4F38E2A6F02A6008FD347 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		96EF6A262A5745E800719F8F /* SmartSats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EF6A292A5745E800719F8F /* SmartSatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSatsApp.swift; sourceTree = "<group>"; };
 		96EF6A2B2A5745E800719F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -120,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96B4F3922A6F0383008FD347 /* CodeScanner in Frameworks */,
 				96158F252A589F4D0053C4DA /* BreezSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,11 +172,12 @@
 			isa = PBXGroup;
 			children = (
 				96158F2E2A58A1020053C4DA /* AsyncButton.swift */,
-				96B4F37C2A6D59E4008FD347 /* WalletSummaryCard.swift */,
+				96B4F37C2A6D59E4008FD347 /* BalanceSummaryCard.swift */,
 				96B4F3802A6D5EE7008FD347 /* CustomIcon.swift */,
 				96B4F3842A6D69E0008FD347 /* TransactionList.swift */,
 				96B4F3862A6D8186008FD347 /* TxListItem.swift */,
 				96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */,
+				96B4F38C2A6EF708008FD347 /* FloatingButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 				96158F332A5B225E0053C4DA /* ReceiveView.swift */,
 				96094A472A5ECF19004A4A62 /* TransactionView.swift */,
 				96B4F3722A6D5079008FD347 /* DebugView.swift */,
+				96B4F38E2A6F02A6008FD347 /* ScannerView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -288,6 +296,7 @@
 			name = SmartSats;
 			packageProductDependencies = (
 				96158F242A589F4D0053C4DA /* BreezSDK */,
+				96B4F3912A6F0383008FD347 /* CodeScanner */,
 			);
 			productName = SmartSats;
 			productReference = 96EF6A262A5745E800719F8F /* SmartSats.app */;
@@ -322,6 +331,7 @@
 			mainGroup = 96EF6A1D2A5745E800719F8F;
 			packageReferences = (
 				96158F232A589F4D0053C4DA /* XCRemoteSwiftPackageReference "breez-sdk-swift" */,
+				96B4F3902A6F0383008FD347 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 96EF6A272A5745E800719F8F /* Products */;
 			projectDirPath = "";
@@ -389,12 +399,14 @@
 				96158F382A5B26070053C4DA /* UIScreen.swift in Sources */,
 				96094A462A5EB13C004A4A62 /* Payment.swift in Sources */,
 				96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */,
+				96B4F38D2A6EF708008FD347 /* FloatingButton.swift in Sources */,
 				96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */,
 				96B4F37F2A6D5A13008FD347 /* Modifiers.swift in Sources */,
 				96B4F3752A6D52EA008FD347 /* HomeView.swift in Sources */,
 				96158F362A5B24710053C4DA /* String.swift in Sources */,
 				96158F222A589F300053C4DA /* LN.swift in Sources */,
-				96B4F37D2A6D59E4008FD347 /* WalletSummaryCard.swift in Sources */,
+				96B4F38F2A6F02A6008FD347 /* ScannerView.swift in Sources */,
+				96B4F37D2A6D59E4008FD347 /* BalanceSummaryCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +606,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartSats/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SmartSats;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required to scan QR";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -604,6 +618,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -634,7 +649,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartSats/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SmartSats;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required to scan QR";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -644,6 +661,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -700,6 +718,14 @@
 				minimumVersion = 0.1.1;
 			};
 		};
+		96B4F3902A6F0383008FD347 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -712,6 +738,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 96158F232A589F4D0053C4DA /* XCRemoteSwiftPackageReference "breez-sdk-swift" */;
 			productName = BreezSDK;
+		};
+		96B4F3912A6F0383008FD347 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96B4F3902A6F0383008FD347 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

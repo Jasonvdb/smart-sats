@@ -21,13 +21,18 @@ struct TxListItem: View {
             }
             Spacer()
             amount
+                .padding(.horizontal, 6)
         }
         .contentShape(Rectangle()) //Allows whole area to be tapped
         .padding(8)
         .background(.ultraThinMaterial)
-        .backgroundColor(opacity: 0.2, cornerRadius: 20)
-        .backgroundStyle(cornerRadius: 20)
-        .modifier(OutlineModifier(cornerRadius: 20))
+        .backgroundColor(opacity: 0.5, cornerRadius: 10)
+        .cornerRadius(10)
+        .modifier(OutlineModifier(cornerRadius: 10))
+        .shadow(
+            color: Color.shadow.opacity(0.3),
+            radius: 6, x: 0, y: 4
+        )
     }
     
     var image: some View {
@@ -58,7 +63,7 @@ struct TxListItem: View {
             .background(Color(UIColor.systemBackground).opacity(0.3))
             .mask(Circle())
     }
-   
+    
     var title: some View {
         var title = payment.description ?? ""
         if title == "" {
@@ -80,8 +85,20 @@ struct TxListItem: View {
     }
     
     var amount: some View {
-        VStack(alignment: .trailing) {
-            Text("\(payment.amountMsat.sats) sats")
+        var prefix = ""
+        switch payment.paymentType {
+        case .received:
+            prefix = "+"
+            break
+        case .sent:
+            prefix = "-"
+            break
+        case .closedChannel:
+            break
+        }
+        
+        return VStack(alignment: .trailing) {
+            Text("\(prefix)\(payment.amountMsat.sats) sats")
                 .foregroundStyle(Color.brandTextPrimary)
             Text("Fee: \(payment.feeMsat.sats)")
                 .font(.caption.weight(.light))

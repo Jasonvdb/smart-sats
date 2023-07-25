@@ -89,6 +89,22 @@ extension View {
     func backgroundStyle(cornerRadius: CGFloat = 20, opacity: Double = 0.6) -> some View {
         self.modifier(BackgroundStyle(cornerRadius: cornerRadius, opacity: opacity))
     }
+    
+    func glow(color1: Color, color2: Color, color3: Color, intensity: Double = 1, radiusAmplifier: Double = 1) -> some View {
+        self //.foregroundColor(Color(hue: 0.5, saturation: 0.8, brightness: 1))
+            .background {
+                self.foregroundColor(color1).blur(radius: 0).brightness(0.8 * intensity)
+            }
+            .background {
+                self.foregroundColor(color2).blur(radius: 4 * radiusAmplifier).brightness(0.35 * intensity)
+            }
+            .background {
+                self.foregroundColor(color3).blur(radius: 2 * radiusAmplifier).brightness(0.35 * intensity)
+            }
+            .background {
+                self.foregroundColor(color3).blur(radius: 8 * radiusAmplifier).brightness(0.35 * intensity)
+            }
+    }
 }
 
 struct CustomIconModifier: ViewModifier {
@@ -100,5 +116,26 @@ struct CustomIconModifier: ViewModifier {
             .backgroundStyle(cornerRadius: 18, opacity: 0.4)
             .cornerRadius(18)
             .modifier(OutlineOverlay(cornerRadius: 18))
+    }
+}
+
+struct CircleOutlineOverlay: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
+    
+    func body(content: Content) -> some View {
+        content.overlay(
+            Circle()
+                .stroke(
+                    .linearGradient(
+                        colors: [
+                            .white.opacity(colorScheme == .dark ? 0.6 : 0.3),
+                            .black.opacity(colorScheme == .dark ? 0.3 : 0.1)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom)
+                )
+                .blendMode(.overlay)
+        )
+        .contentShape(.contextMenuPreview, Circle())
     }
 }

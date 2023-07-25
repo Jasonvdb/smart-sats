@@ -278,6 +278,13 @@ class LN: ObservableObject {
         }
     }
     
+    func decode(_ data: String) async throws -> InputType {
+        guard let sdk else { throw LNErrors.sdkNotSet }
+        return try await background {
+            return try BreezSDK.parseInput(s: data)
+        }
+    }
+    
     func lsp() async throws -> LspInformation? {
         guard let sdk else { throw LNErrors.sdkNotSet }
         return try await background {

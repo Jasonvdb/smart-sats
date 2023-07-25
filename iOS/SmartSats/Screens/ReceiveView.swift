@@ -8,26 +8,42 @@
 import SwiftUI
 
 struct ReceiveView: View {
-    @Binding var invoice: String
-    
+    @ObservedObject var ln = LN.shared
+
+    @State var invoice: String?
+    @State var sats: UInt64 = 5000
+
     var body: some View {
         VStack {
-            if let qr = invoice.qr {
-                Image(uiImage: qr)
-                    .resizable()
-                    .interpolation(.none)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity)
+            if let invoice {
+                Text("\(sats) sats")
+                    .font(.title)
                     .padding()
+                if let qr = invoice.qr {
+                    Image(uiImage: qr)
+                        .resizable()
+                        .interpolation(.none)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                }
+                
+                Button {
+                    UIPasteboard.general.string = invoice
+                } label: {
+                    Text(invoice)
+                        .multilineTextAlignment(.center)
+                        .font(.footnote)
+                        .padding()
+                }
+            } else {
+                ProgressView()
             }
-            
-            Button {
-                UIPasteboard.general.string = invoice
-            } label: {
-                Text(invoice)
-                    .multilineTextAlignment(.center)
-                    .font(.footnote)
-                    .padding()
+        }
+        .onAppear {
+            Task {
+                let res = try await ln.receive(amountSats: sats, description: "Testing UI")
+                invoice = res.bolt11
             }
         }
     }
@@ -35,6 +51,6 @@ struct ReceiveView: View {
 
 struct ReceiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ReceiveView(invoice: .constant("lnbc2u1pj2465ypp5d7ygtjeuws7kmglccr26mgdhag05m66g79t7pcfzursufyl4vr6sdqdw3jhxar9v4jk2cqzzsxqrrsssp5tmpntm20sf5wzdwuu76uksh5ph0y8vgyp3ervzvd8cdvtdjcncqq9qyyssqz8m2qm9j359qeshgf66xlq6k5qys0nzjn56s6azqxn8kl5uv8y69ph7a2eaxlz4gjs22sm2trr3w6hqwneu47amr79vdzslqxyxwxjspwrf5m9"))
+        ReceiveView()
     }
 }

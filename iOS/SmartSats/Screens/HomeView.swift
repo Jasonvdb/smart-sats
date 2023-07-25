@@ -8,8 +8,10 @@
 import SwiftUI
 
 
-fileprivate let defaultSummaryHeight: CGFloat = 160
-fileprivate let defaultAgentListHeight: CGFloat = 200
+fileprivate let defaultSummaryHeight: CGFloat = 140
+fileprivate let defaultAgentListHeight: CGFloat = 180
+
+fileprivate let compactOffset: CGFloat = 55
 
 struct HomeView: View {
     @ObservedObject var ln = LN.shared
@@ -20,7 +22,8 @@ struct HomeView: View {
     @State var isCompact = false
     @State var scrollOffset: CGFloat = 0
     
-    @Namespace var namespace
+    @State var showReceive = false
+    @State var showScanner = false
     
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color.brandTextPrimary.opacity(0.7))
@@ -33,18 +36,26 @@ struct HomeView: View {
             ZStack(alignment: .top) {
                 VStack {
                     header
-                    WalletSummaryCard(isCompact: $isCompact)
-                        .frame(height: isCompact ? defaultSummaryHeight * 0.4 : defaultSummaryHeight)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal)
+                        .offset(y: isCompact ? compactOffset : 0)
                     Group {
-                        if #available(iOS 16.0, *) {
-                            agentList.scrollIndicators(.hidden)
-                        } else {
-                            agentList
+                        BalanceSummaryCard(isCompact: $isCompact)
+                            .frame(height: isCompact ? 50 : defaultSummaryHeight)
+                            .frame(maxWidth: isCompact ? 200 : .infinity)
+                            .padding(.horizontal)
+                        Group {
+                            if #available(iOS 16.0, *) {
+                                agentList.scrollIndicators(.hidden)
+                            } else {
+                                agentList
+                            }
                         }
                     }
+                    .offset(y: min(max(scrollOffset, 0) * 0.1, 15)) //Pulling down slightly
                 }
+                .background(Color.brandAccent2.opacity(isCompact ? 0.2 : 0))
+                .background(.thinMaterial.opacity(isCompact ? 0.9 : 0))
+                .cornerRadius(20)
+                .offset(y: isCompact ? -compactOffset : 0)
                 .zIndex(999)
                 
                 TransactionList(topSpace: defaultSummaryHeight + defaultAgentListHeight + 60) { y in
@@ -62,15 +73,19 @@ struct HomeView: View {
                         }
                     }
                 }
+                .refreshable {
+                    try? await ln.sync()
+                }
             }
             .background(
                 Image("Blob 1")
                     .opacity(0.9)
                     .rotationEffect(.degrees(180))
-                    .scaleEffect(1.3)
-                    .offset(x: -320, y: -240 + scrollOffset * -0.2)
+                    .scaleEffect(max(1.3, 1.3 + scrollOffset * 0.001))
+                    .offset(x: -320, y: -240 + scrollOffset * -0.1)
                     .accessibility(hidden: true)
             )
+            .overlay(buttons, alignment: .bottom)
         }
     }
     
@@ -84,7 +99,7 @@ struct HomeView: View {
             .accessibilityLabel("Settings")
             
             Spacer()
-//                        Text("\(scrollOffset)")
+            Text("\(scrollOffset)")
             
             Button {
                 //TODO
@@ -115,7 +130,23 @@ struct HomeView: View {
         //        .sheet(isPresented: $showPost) {
         //            PostView(post: $selectedPost)
         //        }
-                
+        
+    }
+    
+    var buttons: some View {
+        HStack {
+            FloatingButton(systemName: "arrow.down")
+                .onTapGesture { showReceive = true }
+            
+            FloatingButton(systemName: "qrcode.viewfinder")
+                .onTapGesture { showScanner = true }
+        }
+        .sheet(isPresented: $showReceive, content: {
+            ReceiveView()
+        })
+        .sheet(isPresented: $showScanner, content: {
+            ScannerView()
+        })
     }
 }
 

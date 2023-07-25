@@ -117,9 +117,9 @@ struct DebugView: View {
                 showTransaction = true
             }
         }
-        .sheet(isPresented: $showReceive, content: {
-            ReceiveView(invoice: $receiveInvoice)
-        })
+//        .sheet(isPresented: $showReceive, content: {
+//            ReceiveView(invoice: $receiveInvoice)
+//        })
         .sheet(isPresented: $showTransaction, content: {
             TransactionView(payment: $selectedPayment)
         })
