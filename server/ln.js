@@ -1,5 +1,4 @@
 const lnService = require('ln-service');
-const {once} = require('events');
 
 const LND_MACAROON = process.env.LND_MACAROON;
 if (!LND_MACAROON) {
@@ -13,14 +12,25 @@ if (!LND_SOCKET) {
     process.exit(1);
 }
 
+const PUSH_SERVER = process.env.PUSH_SERVER;
+if (!PUSH_SERVER) {
+    console.error('PUSH_SERVER environment variable is not set');
+    process.exit(1);
+}
+
 const {lnd} = lnService.authenticatedLndGrpc({
     macaroon: LND_MACAROON,
+    socket: LND_SOCKET,
+});
+
+console.log({
     socket: LND_SOCKET,
 });
 
 lnService.getWalletInfo({lnd}, (err, result) => {
     if (err) { 
         console.log(err);
+        return;
     }
 
     const {public_key, version, pending_channels_count, active_channels_count, peers_count} = result;
@@ -33,16 +43,16 @@ const peers = [
         public_key: '02c811e575be2df47d8b48dab3d3f1c9b0f6e16d0d40b5ed78253308fc2bd7170d',
         socket: '212.129.58.219:9835'
     },
-    {
-        //Voltage:
-        public_key: '02cfdc6b60e5931d174a342b20b50d6a2a17c6e4ef8e077ea54069a3541ad50eb0',
-        socket: '52.89.237.109:9735'
-    },
-    {
-        //Digital ocean node
-        public_key: "034a6d609dde7a8835c7e652cfbeb380a891c5b8881efa458e0d0bb78a30da4d68",
-        socket: "144.126.204.130:9735"
-    },
+    // {
+    //     //Voltage:
+    //     public_key: '02cfdc6b60e5931d174a342b20b50d6a2a17c6e4ef8e077ea54069a3541ad50eb0',
+    //     socket: '52.89.237.109:9735'
+    // },
+    // {
+    //     //Digital ocean node
+    //     public_key: "034a6d609dde7a8835c7e652cfbeb380a891c5b8881efa458e0d0bb78a30da4d68",
+    //     socket: "159.65.211.96:9735"//"144.126.204.130:9735"
+    // },
     {
         //Blocktank
         public_key: "0296b2db342fcf87ea94d981757fdf4d3e545bd5cef4919f58b5d38dfdd73bf5c9",
@@ -119,7 +129,7 @@ async function chargeUser(sats, description) {
     console.log(bolt11);
 
     fetch(
-		'http://192.168.1.108:8765/charge?bolt11=' + bolt11,
+        PUSH_SERVER + '/charge?bolt11=' + bolt11,
 		{
 			headers: { Authorization: "Bearer " + "TODO" },
 			method: "POST",

@@ -33,7 +33,6 @@ struct DebugView: View {
                 .font(.footnote)
             Text(message)
                 .foregroundColor(.green)
-            Text("Received payments: \($ln.successfulPaymentsInThisSession.count)")
             
             if !ln.hasNode {
                 AsyncButton(title: "Connect node") {

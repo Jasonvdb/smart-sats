@@ -11,7 +11,7 @@ struct ReceiveView: View {
     @ObservedObject var ln = LN.shared
 
     @State var invoice: String?
-    @State var sats: UInt64 = 5000
+    @State var sats: UInt64 = 500
 
     var body: some View {
         VStack {

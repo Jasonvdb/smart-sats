@@ -16,14 +16,12 @@ class KeyChain {
     private static let group = "BJJ5WGNUJH.jasonvdb.smartsats"
     
     enum KeyChainKey: String {
-        case glDeviceCert = "gl-device-cert2"
-        case glDeviceKey = "gl-device-key2"
-        case nodeSeed = "node-seed2"
+        case nodeSeed = "node-seed1"
         
         //Saved in onboarding
-        case breezApiKey = "breez-api-key2"
-        case glInviteCode = "gl-invite-code2"
-        case mnumonic = "mnumonic2"
+        case breezApiKey = "breez-api-key1"
+        case glInviteCode = "gl-invite-code1"
+        case mnumonic = "mnumonic1"
     }
     
     class func save(key: KeyChainKey, data: Data) throws {
@@ -100,8 +98,6 @@ class KeyChain {
     
     class func wipe() {
         #if DEBUG
-        delete(key: .glDeviceCert)
-        delete(key: .glDeviceKey)
         delete(key: .nodeSeed)
         delete(key: .mnumonic)
         delete(key: .breezApiKey)

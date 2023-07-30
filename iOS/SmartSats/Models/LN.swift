@@ -67,44 +67,31 @@ class LN: ObservableObject {
     public static var shared = LN()
     
     private var sdk: BlockingBreezServices?
-    private let queue = DispatchQueue(label: "greenlight")
+    private let queue = DispatchQueue(label: "breezsdk")
 
     private let network: Network = .bitcoin
     
     @Published var synced = false
     @Published var nodeInfo: NodeState?
     @Published var payments: [Payment] = []
-    @Published var successfulPaymentsInThisSession: [Payment] = [] //For the background task if it's receiving multiple payments and we want a tally
-
-    private var greenlightCredentials: GreenlightCredentials? {
-        get {
-            guard let key = KeyChain.load(key: .glDeviceKey), let cert = KeyChain.load(key: .glDeviceCert) else {
-                return nil
-            }
-            
-            return GreenlightCredentials(deviceKey: [UInt8](key), deviceCert: [UInt8](cert))
-        }
-        
-        set {
-            do {
-                if let cred = newValue {
-                    try KeyChain.save(key: .glDeviceCert, data: Data(cred.deviceCert))
-                    try KeyChain.save(key: .glDeviceKey, data: Data(cred.deviceKey))
-                }
-            } catch {
-                print("FAILED TO SAVE TO KEYCHAIN")
-                fatalError(error.localizedDescription)
-            }
-        }
-    }
+    
+    //If spun up in an app extension there is no need to sync everything
+    var isInForeground = true
     
     var hasNode: Bool {
-        greenlightCredentials != nil && cachedSeed != nil
+        return cachedSeed != nil
     }
     
     private var cachedSeed: [UInt8]? {
         if let seed = KeyChain.load(key: .nodeSeed) {
             return [UInt8](seed)
+        }
+        
+        if let phrase = KeyChain.loadString(key: .mnumonic) {
+            if let seed = try? mnemonicToSeed(phrase: phrase) {
+                try? KeyChain.save(key: .nodeSeed, data: Data(seed))
+                return seed
+            }
         }
         
         return nil
@@ -120,10 +107,17 @@ class LN: ObservableObject {
     private lazy var storage: String? = {
         let fileManager = FileManager.default
                 
-        guard let path = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.smartsats")?.appendingPathComponent("breez").path else {
+        guard var url = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.smartsats") else {
             return nil
         }
+        
+        if !isInForeground {
+            url = url.appendingPathComponent("background_breez")
+        } else {
+            url = url.appendingPathComponent("breez")
+        }
                 
+        let path = url.path
         if !fileManager.fileExists(atPath: path) {
             do {
                 try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
@@ -189,7 +183,6 @@ class LN: ObservableObject {
             case .paymentSucceed(let details):
                 print("***SUCCCESS***")
                 print(details)
-                self.successfulPaymentsInThisSession.append(details)
                 break
             }
             
@@ -199,31 +192,35 @@ class LN: ObservableObject {
     
     /// Syncs all node details to published vars from UI thread
     private func syncUI() {
+        guard isInForeground else {
+            return
+        }
+        
         DispatchQueue.main.async {
             self.nodeInfo = try? self.sdk?.nodeInfo()
-            if let payments = try? self.sdk?.listPayments(filter: .all, fromTimestamp: nil, toTimestamp: nil) {
+            
+            let days = 14
+            let from = Calendar.current.date(byAdding: .day, value: -days, to: Date())?.timeIntervalSince1970
+            
+            if let payments = try? self.sdk?.listPayments(filter: .all, fromTimestamp: Int64(from!), toTimestamp: nil) {
                 self.payments = payments
             }
         }
     }
     
     func connect() async throws {
-        guard let greenlightCredentials else {
-            throw LNErrors.missingCredentials
-        }
-        
         guard let storage else {
             throw LNErrors.missingStorage
         }
-        
+                
         guard let seed = self.cachedSeed else {
             throw LNErrors.missingSeed
         }
-        
+                
         guard let inviteCode = KeyChain.loadString(key: .glInviteCode) else {
             throw LNErrors.missingInviteCode
         }
-        
+                
         guard let apiKey = KeyChain.loadString(key: .breezApiKey) else {
             throw LNErrors.missingApiKey
         }
@@ -231,18 +228,19 @@ class LN: ObservableObject {
         DispatchQueue.main.async {
             self.synced = false
         }
+        
         return try await background {
             var config = defaultConfig(
                 envType: EnvironmentType.production,
                 apiKey: apiKey,
-                nodeConfig: .greenlight(config: .init(partnerCredentials: greenlightCredentials, inviteCode: inviteCode))
+                nodeConfig: .greenlight(config: .init(partnerCredentials: nil, inviteCode: inviteCode))
             )
             config.workingDir = storage
             
             print("Connecting...")
             self.sdk = try BreezSDK.connect(config: config, seed: seed, listener: SDKListener());
             print("Connected")
-            self.syncUI()
+            self.syncUI()            
         }
     }
     
@@ -296,6 +294,13 @@ class LN: ObservableObject {
         }
     }
     
+    func dev(_ command: String) async throws -> String? {
+        guard let sdk else { throw LNErrors.sdkNotSet }
+        return try await background {
+            return try sdk.executeDevCommand(command: command)
+        }
+    }
+    
     private func background<T>(_ blocking: @escaping () throws -> T) async throws -> T {
         try await withCheckedThrowingContinuation { continuation in
             queue.async {
@@ -305,23 +310,23 @@ class LN: ObservableObject {
                 } catch let sdkError as SdkError {
                     switch sdkError as SdkError {
                     case .Generic(let message):
-                        print("SdkError: \(message)")
+                        print("SdkError Generic: \(message)")
                         continuation.resume(throwing: SdkDisplayError(message: message))
                         break;
                     case .InitFailed(let message):
-                        print("SdkError: \(message)")
+                        print("SdkError InitFailed: \(message)")
                         continuation.resume(throwing: SdkDisplayError(message: message))
                         break;
                     case .LspConnectFailed(let message):
-                        print("SdkError: \(message)")
+                        print("SdkError LspConnectFailed: \(message)")
                         continuation.resume(throwing: SdkDisplayError(message: message))
                         break;
                     case .PersistenceFailure(let message):
-                        print("SdkError: \(message)")
+                        print("SdkError PersistenceFailure: \(message)")
                         continuation.resume(throwing: SdkDisplayError(message: message))
                         break;
                     case .ReceivePaymentFailed(let message):
-                        print("SdkError: \(message)")
+                        print("SdkError ReceivePaymentFailed: \(message)")
                         continuation.resume(throwing: SdkDisplayError(message: message))
                         break;
                     }

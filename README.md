@@ -12,10 +12,10 @@ Budgets for your agents
 - [ ] Push server auth
 - [ ] Server budgeting logic
 - [ ] Mobile budgeting logic
-- [ ] Mobile UI
+- [x] Mobile UI
 - [ ] Demo UI
 - [ ] Deploy demo
-- [ ] Push app to TestFlight
+- [x] Push app to TestFlight
 - [ ] Refactor demo to use langchain
 - [ ] Migrate to Replit
 - [ ] Agent to use L402

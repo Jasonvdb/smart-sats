@@ -8,7 +8,7 @@ const { fancyGuid, createPushData } = require('./helpers');
 const push = new PushNotifications(pushSettings);
 const fancyDb = {}; //TODO persist
 
-const hardcodedpushtoken = "9d337e92ce0c5b86915bd3cca5218e9f988268a4a74be6b279b09e95a8fcf66b";
+const hardcodedpushtoken = "a3ccdae5ca36db02ea0fe779a3226dc614b35a3f088290ef3d00d8fadd2062eb";
 
 // let charge = {
 //     sats: 123, //Sats sent through because we can't decode invoices yet
@@ -67,7 +67,6 @@ const requestListener = (req, res) => {
         }
 
         let charge = {
-            sats: 123, //Sats sent through because we can't decode invoices yet
             bolt11,
             auth: 'auth123'
         };

@@ -12,23 +12,32 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var ln = LN.shared
     
+    @ObservedObject var viewModel = ViewModel.shared
+    
     var body: some View {
-        HomeView()
-            .onChange(of: scenePhase) { newPhase in
-                Task {
-                    do {
-                        guard ln.hasNode else {
-                            return
-                        }
-                        
-                        if newPhase == .active {
-                            try await ln.connect()
-                        }
-                    } catch {
-                        print(error.localizedDescription)
+        Group {
+            if viewModel.showOnboardingModal {
+                OnboardingView()
+            } else {
+                HomeView()
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            Task {
+                do {
+                    guard ln.hasNode else {
+                        return
                     }
+                    
+                    if newPhase == .active {
+                        try await ln.connect()
+                    }
+                } catch {
+                    print("TODO show error")
+                    print(error.localizedDescription)
                 }
             }
+        }
     }
 }
 

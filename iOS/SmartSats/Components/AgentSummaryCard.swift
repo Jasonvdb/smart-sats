@@ -46,7 +46,7 @@ struct AgentSummaryCard: View {
         .frame(maxWidth: .infinity)
         .frame(maxHeight: .infinity)
         .background(.ultraThinMaterial)
-        .backgroundColor(opacity: isCompact ? 1 : 0.5, cornerRadius: isCompact ? 10 : 20)
+        .backgroundColor(opacity: isCompact ? 0.3 : 0.5, cornerRadius: isCompact ? 10 : 20)
         .cornerRadius(isCompact ? 10 : 20)
         .modifier(OutlineModifier(cornerRadius: isCompact ? 10 : 20))
         .frame(width: 220)

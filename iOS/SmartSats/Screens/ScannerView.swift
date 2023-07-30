@@ -24,11 +24,35 @@ struct ScannerView: View {
             }
         }
         .overlay {
-            if message != "" {
-                Text(message)
-                    .font(.largeTitle)
-                    .foregroundColor(Color.brandAccent2)
-                    .padding()
+            VStack {
+                Spacer()
+                if message != "" {
+                    Text(message)
+                        .foregroundColor(Color.brandAccent2)
+                        .padding()
+                        .padding()
+                        .background(.black)
+                        .cornerRadius(12)
+                        .padding()
+                }
+                
+                AsyncButton(title: "Paste") {
+                    message = ""
+                    guard let data = clipboard() else {
+                        
+                        //Clitch, try again
+                        guard let data = clipboard() else {
+                            message = "Empty clipboard"
+                            return
+                        }
+                        
+                        onScan(data)
+                        return
+                    }
+                    
+                    onScan(data)
+                }
+                .padding(40)
             }
         }
         .ignoresSafeArea(.all)
@@ -37,7 +61,6 @@ struct ScannerView: View {
     func onScan(_ data: String) {
         Task {
             do {
-                message = "Decoding..."
                 let type = try await ln.decode(data)
                 switch type {
                 case .bolt11(let invoice):
@@ -45,6 +68,8 @@ struct ScannerView: View {
                     message = "Paying \(invoice.amountMsat?.sats ?? 0) sats..."
                     //TODO disable if people use shared seed
                     let res = try await ln.pay(invoice.bolt11)
+                   
+                    message = res.pending ? "Pending" : "Success!"
                     break
                 case .bitcoinAddress(address: let address):
                     print(address)
@@ -62,7 +87,7 @@ struct ScannerView: View {
                     print(data)
                     break
                 case .lnUrlAuth(data: let data):
-                    print(data)
+                    print(data.action ?? "No ACTION")
                     break
                 case .lnUrlError(data: let data):
                     print(data)

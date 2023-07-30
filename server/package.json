@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Jasonvdb/smart-sats#readme",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "ln-service": "^56.8.0",
     "openai": "^3.3.0",
     "socket.io": "^4.7.1"

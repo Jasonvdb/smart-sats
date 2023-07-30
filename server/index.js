@@ -1,5 +1,6 @@
 const http = require('http');
 const {Configuration, OpenAIApi} = require("openai");
+require('dotenv').config();
 const {chargeUser} = require('./ln');
 
 const OPEN_AI_API_KEY = process.env.OPEN_AI_API_KEY;
@@ -121,15 +122,15 @@ io.on('connection', async (socket) => {
 
                         socket.emit('progress_response', "Code completed ✅");
 
-                        const imageCost = 30;
-                        socket.emit('progress_response', "Charging user " + imageCost + " sats 💰 (for image generation)");
-                        if (!(await chargeUser(imageCost, "Image generation"))) {
-                            socket.emit('progress_response', "Payment not received. Aborting... ❌");
-                            socket.emit('code_response', '[ERROR]');
-                            return;
-                        }
+                        // const imageCost = 30;
+                        // socket.emit('progress_response', "Charging user " + imageCost + " sats 💰 (for image generation)");
+                        // if (!(await chargeUser(imageCost, "Image generation"))) {
+                        //     socket.emit('progress_response', "Payment not received. Aborting... ❌");
+                        //     socket.emit('code_response', '[ERROR]');
+                        //     return;
+                        // }
 
-                        socket.emit('progress_response', "Payment received! 🤑 Generating image...");
+                        socket.emit('progress_response', "Generating image...");
 
                         //TODO get an image form the model and use that as input
                         const base64 = await getImage({"inputs": "Bitcoin-themed image."})

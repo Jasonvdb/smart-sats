@@ -1,5 +1,16 @@
-const host = '192.168.1.108';
-const port = 8765;
+require('dotenv').config();
+
+const HOST = process.env.HOST;
+if (!HOST) {
+    console.error('HOST environment variable is not set');
+    process.exit(1);
+}
+
+const PORT = process.env.PORT;
+if (!PORT) {
+    console.error('PORT environment variable is not set');
+    process.exit(1);
+}
 
 const pushSettings = {
     apn: {
@@ -20,4 +31,4 @@ const defaultPaymentAlert = {
 
 const appBundleID = 'jasonvdb.SmartSats';
 
-module.exports = {host, port, pushSettings, defaultPaymentAlert, appBundleID};
+module.exports = {host: HOST, port: PORT, pushSettings, defaultPaymentAlert, appBundleID};

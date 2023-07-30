@@ -42,6 +42,13 @@
 		96B4F38D2A6EF708008FD347 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38C2A6EF708008FD347 /* FloatingButton.swift */; };
 		96B4F38F2A6F02A6008FD347 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38E2A6F02A6008FD347 /* ScannerView.swift */; };
 		96B4F3922A6F0383008FD347 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 96B4F3912A6F0383008FD347 /* CodeScanner */; };
+		96B4F3962A7161E8008FD347 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3952A7161E8008FD347 /* SettingsView.swift */; };
+		96B4F3982A7163E6008FD347 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3972A7163E6008FD347 /* OnboardingView.swift */; };
+		96B4F39A2A716495008FD347 /* OnboardingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3992A716495008FD347 /* OnboardingContent.swift */; };
+		96B4F39C2A716517008FD347 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F39B2A716517008FD347 /* CtaButton.swift */; };
+		96B4F39E2A71653E008FD347 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F39D2A71653E008FD347 /* Haptics.swift */; };
+		96B4F3A42A71A75C008FD347 /* lightning-clip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 96B4F3A32A71A75B008FD347 /* lightning-clip.mp4 */; };
+		96B4F3A62A72E98F008FD347 /* NodeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3A52A72E98F008FD347 /* NodeInfoView.swift */; };
 		96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A292A5745E800719F8F /* SmartSatsApp.swift */; };
 		96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EF6A2B2A5745E800719F8F /* ContentView.swift */; };
 		96EF6A2E2A5745EA00719F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EF6A2D2A5745EA00719F8F /* Assets.xcassets */; };
@@ -104,6 +111,13 @@
 		96B4F38A2A6D97C4008FD347 /* Agents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agents.swift; sourceTree = "<group>"; };
 		96B4F38C2A6EF708008FD347 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		96B4F38E2A6F02A6008FD347 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		96B4F3952A7161E8008FD347 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		96B4F3972A7163E6008FD347 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		96B4F3992A716495008FD347 /* OnboardingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContent.swift; sourceTree = "<group>"; };
+		96B4F39B2A716517008FD347 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
+		96B4F39D2A71653E008FD347 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		96B4F3A32A71A75B008FD347 /* lightning-clip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lightning-clip.mp4"; sourceTree = "<group>"; };
+		96B4F3A52A72E98F008FD347 /* NodeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInfoView.swift; sourceTree = "<group>"; };
 		96EF6A262A5745E800719F8F /* SmartSats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EF6A292A5745E800719F8F /* SmartSatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSatsApp.swift; sourceTree = "<group>"; };
 		96EF6A2B2A5745E800719F8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -151,6 +165,7 @@
 				96158F302A5B1D610053C4DA /* Clipboard.swift */,
 				96B4F3782A6D5495008FD347 /* PreferenceKey.swift */,
 				96B4F37E2A6D5A13008FD347 /* Modifiers.swift */,
+				96B4F39D2A71653E008FD347 /* Haptics.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -178,6 +193,8 @@
 				96B4F3862A6D8186008FD347 /* TxListItem.swift */,
 				96B4F3882A6D967F008FD347 /* AgentSummaryCard.swift */,
 				96B4F38C2A6EF708008FD347 /* FloatingButton.swift */,
+				96B4F3992A716495008FD347 /* OnboardingContent.swift */,
+				96B4F39B2A716517008FD347 /* CtaButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -190,6 +207,9 @@
 				96094A472A5ECF19004A4A62 /* TransactionView.swift */,
 				96B4F3722A6D5079008FD347 /* DebugView.swift */,
 				96B4F38E2A6F02A6008FD347 /* ScannerView.swift */,
+				96B4F3952A7161E8008FD347 /* SettingsView.swift */,
+				96B4F3972A7163E6008FD347 /* OnboardingView.swift */,
+				96B4F3A52A72E98F008FD347 /* NodeInfoView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -241,6 +261,7 @@
 				96158F282A58A00F0053C4DA /* Extensions */,
 				96EF6A292A5745E800719F8F /* SmartSatsApp.swift */,
 				96EF6A2B2A5745E800719F8F /* ContentView.swift */,
+				96B4F3A32A71A75B008FD347 /* lightning-clip.mp4 */,
 				96EF6A2D2A5745EA00719F8F /* Assets.xcassets */,
 				96EF6A2F2A5745EA00719F8F /* SmartSats.entitlements */,
 				96EF6A302A5745EA00719F8F /* Preview Content */,
@@ -356,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96EF6A322A5745EA00719F8F /* Preview Assets.xcassets in Resources */,
+				96B4F3A42A71A75C008FD347 /* lightning-clip.mp4 in Resources */,
 				96EF6A2E2A5745EA00719F8F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +404,7 @@
 				96B4F3792A6D5495008FD347 /* PreferenceKey.swift in Sources */,
 				96094A482A5ECF19004A4A62 /* TransactionView.swift in Sources */,
 				96B4F3892A6D967F008FD347 /* AgentSummaryCard.swift in Sources */,
+				96B4F3982A7163E6008FD347 /* OnboardingView.swift in Sources */,
 				96B4F3732A6D5079008FD347 /* DebugView.swift in Sources */,
 				96158F342A5B225E0053C4DA /* ReceiveView.swift in Sources */,
 				96094A422A5E73C3004A4A62 /* Charge.swift in Sources */,
@@ -397,15 +420,20 @@
 				96B4F37B2A6D54E8008FD347 /* Color.swift in Sources */,
 				96B4F3872A6D8186008FD347 /* TxListItem.swift in Sources */,
 				96158F382A5B26070053C4DA /* UIScreen.swift in Sources */,
+				96B4F3962A7161E8008FD347 /* SettingsView.swift in Sources */,
+				96B4F3A62A72E98F008FD347 /* NodeInfoView.swift in Sources */,
 				96094A462A5EB13C004A4A62 /* Payment.swift in Sources */,
 				96158F2C2A58A06D0053C4DA /* UInt64.swift in Sources */,
 				96B4F38D2A6EF708008FD347 /* FloatingButton.swift in Sources */,
+				96B4F39A2A716495008FD347 /* OnboardingContent.swift in Sources */,
+				96B4F39E2A71653E008FD347 /* Haptics.swift in Sources */,
 				96EF6A2A2A5745E800719F8F /* SmartSatsApp.swift in Sources */,
 				96B4F37F2A6D5A13008FD347 /* Modifiers.swift in Sources */,
 				96B4F3752A6D52EA008FD347 /* HomeView.swift in Sources */,
 				96158F362A5B24710053C4DA /* String.swift in Sources */,
 				96158F222A589F300053C4DA /* LN.swift in Sources */,
 				96B4F38F2A6F02A6008FD347 /* ScannerView.swift in Sources */,
+				96B4F39C2A716517008FD347 /* CtaButton.swift in Sources */,
 				96B4F37D2A6D59E4008FD347 /* BalanceSummaryCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

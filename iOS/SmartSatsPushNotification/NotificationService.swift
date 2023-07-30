@@ -17,8 +17,12 @@ class NotificationService: UNNotificationServiceExtension {
     var title: String?
     var body: String?
     let startTime = DispatchTime.now()
+    var requestedAmount: UInt64 = 0
+    var invoiceDescription: String?
     
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        ln.isInForeground = false
+
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
@@ -35,10 +39,24 @@ class NotificationService: UNNotificationServiceExtension {
                 let charge = try Charge(aps: aps)
                 
                 try await ln.connect()
-//                try await ln.sync()
+                if !ln.synced {
+                    try await ln.sync()
+                    await waitForSync()
+                }
                 
-                //TODO check if it's been paid before
-        
+                let decode = try await ln.decode(charge.bolt11)
+                switch decode {
+                case .bolt11(let invoice):
+                    if let amount = invoice.amountMsat?.sats {
+                        requestedAmount += amount
+                    }
+                    invoiceDescription = invoice.description
+                default:
+                    title = "Payment failed"
+                    body = "Received invalid invoice"
+                    break
+                }
+                
                 let pay = try await ln.pay(charge.bolt11)
 
                 title = "Demo charged \(pay.amountMsat.sats) sats ⚡"
@@ -46,31 +64,21 @@ class NotificationService: UNNotificationServiceExtension {
                 deliver()
             } catch {
                 if error.localizedDescription.contains("payment not found") {
-                    title = "Probably paid"
-                    body = error.localizedDescription
-                    //Don't deliver, let the timeout tell the user how much was charged
+                    title = "Probably paid \(requestedAmount))"
+                    body = invoiceDescription
                 } else {
                     title = "Charge failed..."
                     body = error.localizedDescription
-                    deliver()
                 }
+                deliver()
             }
         }
     }
     
     override func serviceExtensionTimeWillExpire() {
-        //Check if we timed out but did receive one or more payments
-        let paymentCount = ln.successfulPaymentsInThisSession.count
-        if paymentCount > 0 {
-            //TODO get the total payments
-            var totalMSats: UInt64 = 0
-        
-            ln.successfulPaymentsInThisSession.forEach { payment in
-                totalMSats += payment.amountMsat
-            }
-            
-            title = "Charged \(totalMSats.sats) sats ⚡"
-            body = "Charged \(paymentCount) payment\(paymentCount > 1 ? "s" : "")"
+        title = "Agent requested a charge"
+        if requestedAmount > 0 {
+            body = "Timeout paying \(requestedAmount) sats. Please open the app to make sure payment was processed."
         } else {
             body = "Timeout (\(ln.synced ? "Synced" : "Not synced"))"
         }
@@ -96,5 +104,10 @@ class NotificationService: UNNotificationServiceExtension {
             contentHandler(bestAttemptContent)
         }
     }
-
+    
+    func waitForSync() async {
+        while !ln.synced {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+    }
 }

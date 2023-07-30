@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from 'socket.io-client';
 
-const socket = io('http://192.168.1.108:3210', {
+const socket = io('http://192.168.0.100:3210', {
   auth: {
     token: 'your-auth-token' //TODO
   }
@@ -87,7 +87,7 @@ const App = () => {
 
       <ul>
         {progressUpdates.map((item) => {
-          return <li style={{fontSize: 10}}>{item}</li>
+          return <li key={item} style={{fontSize: 10}}>{item}</li>
         })}
       </ul>
       <br/><br/><br/><br/>

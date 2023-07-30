@@ -12,7 +12,6 @@ enum ChargeErrors: Error {
 }
 
 struct Charge {
-    let sats: UInt64
     let bolt11: String
     let auth: String
     
@@ -20,13 +19,11 @@ struct Charge {
         guard
             let alert = aps["alert"] as? AnyObject,
             let payload = alert["payload"] as? AnyObject,
-            let sats = payload["sats"] as? UInt64,
             let bolt11 = payload["bolt11"] as? String,
             let auth = payload["auth"] as? String else {
             throw ChargeErrors.invalidAps
         }
         
-        self.sats = sats
         self.bolt11 = bolt11
         self.auth = auth
     }    
