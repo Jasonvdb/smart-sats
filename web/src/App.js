@@ -13,7 +13,7 @@ const App = () => {
   const [prompt, setPrompt] = useState("A website about Bitcoin.\n" +
   "Add a section must be a list of the benefits.\n" +
   "Add a section with possible ways to use it.\n" +
-  "Make a note somewhere about the lightning network and how amazing it is.\n");
+  "Make a note somewhere about what the lightning network is and how amazing it is.\n");
   const [response, setResponse] = useState("");
   const [status, setStatus] = useState("");
   const [isReady, setIsReady] = useState(false);

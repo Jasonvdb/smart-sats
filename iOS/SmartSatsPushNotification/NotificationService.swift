@@ -98,7 +98,7 @@ class NotificationService: UNNotificationServiceExtension {
             let elapsedTimeInSeconds = Double(elapsedTime) / 1_000_000_000.0
             
             if let body = self.body {
-                bestAttemptContent.body = body + " [\(elapsedTimeInSeconds)]"
+                bestAttemptContent.body = body//  + " [\(elapsedTimeInSeconds)]"
             }
             
             contentHandler(bestAttemptContent)

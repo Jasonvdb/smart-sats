@@ -1,7 +1,7 @@
 const http = require('http');
 const {Configuration, OpenAIApi} = require("openai");
 require('dotenv').config();
-const {chargeUser} = require('./ln');
+const {chargeUser} = require('./zbd');
 
 const OPEN_AI_API_KEY = process.env.OPEN_AI_API_KEY;
 if (!OPEN_AI_API_KEY) {
