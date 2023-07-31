@@ -2,7 +2,7 @@
   "name": "smart-sats-demo-server",
   "version": "1.0.0",
   "description": "Smart Sats demo AI agent server",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

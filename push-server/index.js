@@ -8,7 +8,7 @@ const { fancyGuid, createPushData } = require('./helpers');
 const push = new PushNotifications(pushSettings);
 const fancyDb = {}; //TODO persist
 
-const hardcodedpushtoken = "a3ccdae5ca36db02ea0fe779a3226dc614b35a3f088290ef3d00d8fadd2062eb";
+// const hardcodedpushtoken = "a3ccdae5ca36db02ea0fe779a3226dc614b35a3f088290ef3d00d8fadd2062eb";
 
 // let charge = {
 //     sats: 123, //Sats sent through because we can't decode invoices yet
@@ -35,46 +35,49 @@ const requestListener = (req, res) => {
     const query = parts.query;
 
     //TODO allow registering per agent
-    if (parts.pathname == "/register" && query.token) {
-        const guid = fancyGuid();
+    if (parts.pathname === "/register" && query.token) {
+        const id = fancyGuid();
 
-        //TODO validate token
-        fancyDb[guid] = query.token;
+        console.log("Registering agent token :" + id);
+        fancyDb[id] = query.token;
 
         res.writeHead(200);
-        res.end(JSON.stringify({result: `http://${host}:${port}/${guid}`}));
+        const result = JSON.stringify({id, hook: `http://${host}:${port}/charge?token=${id}`})
+        console.log(result);
+        res.end(result);
         return;
     }
 
-    if (parts.pathname == "/revoke") {
-        //TODO
+    if (parts.pathname === "/revoke" && query.id) {
+        console.log("Revoking agent: " + query.id);
+
+        delete fancyDb[query.id];
+
         res.writeHead(200);
-        res.end("TODO");
+        res.end(JSON.stringify({result: 'revoked'}));
         return;
     }
 
     //Called by agent
-    if (parts.pathname == "/charge") {
-        const {sats, guid, bolt11} = query;
-        let deviceToken = fancyDb[guid];
+    if (parts.pathname === "/charge" && query.token) {
+        const {bolt11} = query;
+        let deviceToken = fancyDb[query.token];
         if (!deviceToken) {
-            console.log('guid not found in DB');
-            // res.writeHead(404);
-            // res.end(JSON.stringify({error: 'invalid token'}));
-            // return;
-            //TODO remove
-            deviceToken = hardcodedpushtoken;
+            console.log('token not found in DB' + query.token);
+            res.writeHead(404);
+            res.end(JSON.stringify({error: 'invalid token or token revoked'}));
+            return;
         }
 
         let charge = {
             bolt11,
-            auth: 'auth123'
+            auth: query.token // App needs to validate agent token
         };
 
         const data = createPushData(charge);
 
         push.send(deviceToken, data)
-            .then((results) => { 
+            .then((results) => {
                 if (results[0].success) {
                     console.log('SENT!');
                     res.writeHead(200);
@@ -84,14 +87,14 @@ const requestListener = (req, res) => {
 
                 res.writeHead(500);
                 res.end(JSON.stringify({error: 'failed to notify'}));
-                
+
             })
-            .catch((err) => { 
+            .catch((err) => {
                 res.writeHead(500);
                 console.error(err);
                 res.end(JSON.stringify({error: err}));
             });
-        
+
         return;
     }
 

@@ -1,12 +1,7 @@
-const Electrum = require("electrum-client");
 const { pushSettings, defaultPaymentAlert, appBundleID, host, port, electrumConfig } = require('./settings');
 
 const fancyGuid = () => {
-    let firstPart = (Math.random() * 46656) | 0;
-    let secondPart = (Math.random() * 46656) | 0;
-    firstPart = ("000" + firstPart.toString(36)).slice(-3);
-    secondPart = ("000" + secondPart.toString(36)).slice(-3);
-    return firstPart + secondPart;
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 };
 
 const createPushData = (payload) => {

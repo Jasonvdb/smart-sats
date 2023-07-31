@@ -20,7 +20,6 @@
   "homepage": "https://github.com/Jasonvdb/lightning-mobile-push-payments#readme",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "electrum-client": "^0.0.6",
     "node-pushnotifications": "^2.0.3"
   }
 }
