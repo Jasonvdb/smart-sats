@@ -38,6 +38,13 @@ class NotificationService: UNNotificationServiceExtension {
                 
                 let charge = try Charge(aps: aps)
                 
+                guard let agent = Agents.shared.getAgentBy(pushServerId: charge.auth) else {
+                    title = "Agent charge failed"
+                    body = "Received request from unlinked agent. No charges were made. [\(charge.auth)]"
+                    deliver()
+                    return
+                }
+                
                 try await ln.connect()
                 if !ln.synced {
                     try await ln.sync()
@@ -57,14 +64,24 @@ class NotificationService: UNNotificationServiceExtension {
                     break
                 }
                 
-                let pay = try await ln.pay(charge.bolt11)
+                guard agent.usedBudget + requestedAmount < agent.totalBudget else {
+                    title = "Agent charge failed"
+                    body = "Budget depleted for agent \(agent.name)."
+                    deliver()
+                    return
+                }
 
-                title = "Demo charged \(pay.amountMsat.sats) sats ⚡"
+                let pay = try await ln.pay(charge.bolt11)
+                
+                //MARK: this seems to be breaking!
+                Agents.shared.deductFromAgent(agent, amount: requestedAmount)
+
+                title = "\(agent.name) charged \(pay.amountMsat.sats) sats ⚡"
                 body = pay.description
                 deliver()
             } catch {
                 if error.localizedDescription.contains("payment not found") {
-                    title = "Probably paid \(requestedAmount))"
+                    title = "Paid \(requestedAmount) sats"
                     body = invoiceDescription
                 } else {
                     title = "Charge failed..."

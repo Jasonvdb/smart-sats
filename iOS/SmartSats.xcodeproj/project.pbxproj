@@ -27,6 +27,9 @@
 		96158F382A5B26070053C4DA /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F372A5B26070053C4DA /* UIScreen.swift */; };
 		961BBA622A5D2D3600EE36AE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BBA612A5D2D3600EE36AE /* NotificationService.swift */; };
 		961BBA662A5D2D3600EE36AE /* SmartSatsPushNotification.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 961BBA5F2A5D2D3600EE36AE /* SmartSatsPushNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		96496D3D2A779E2100735F43 /* AgentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96496D3C2A779E2100735F43 /* AgentSetupView.swift */; };
+		96496D3F2A77A8BB00735F43 /* AgentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96496D3E2A77A8BB00735F43 /* AgentView.swift */; };
+		96496D402A780B5900735F43 /* Agents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F38A2A6D97C4008FD347 /* Agents.swift */; };
 		96B4F3732A6D5079008FD347 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3722A6D5079008FD347 /* DebugView.swift */; };
 		96B4F3752A6D52EA008FD347 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3742A6D52EA008FD347 /* HomeView.swift */; };
 		96B4F3772A6D5435008FD347 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4F3762A6D5435008FD347 /* ViewModel.swift */; };
@@ -97,6 +100,8 @@
 		961BBA632A5D2D3600EE36AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		961BBA6B2A5D2D4F00EE36AE /* SmartSatsPushNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSatsPushNotification.entitlements; sourceTree = "<group>"; };
 		961BBA6C2A5D3AFA00EE36AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		96496D3C2A779E2100735F43 /* AgentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSetupView.swift; sourceTree = "<group>"; };
+		96496D3E2A77A8BB00735F43 /* AgentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentView.swift; sourceTree = "<group>"; };
 		96B4F3722A6D5079008FD347 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		96B4F3742A6D52EA008FD347 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		96B4F3762A6D5435008FD347 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -210,6 +215,8 @@
 				96B4F3952A7161E8008FD347 /* SettingsView.swift */,
 				96B4F3972A7163E6008FD347 /* OnboardingView.swift */,
 				96B4F3A52A72E98F008FD347 /* NodeInfoView.swift */,
+				96496D3C2A779E2100735F43 /* AgentSetupView.swift */,
+				96496D3E2A77A8BB00735F43 /* AgentView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -392,6 +399,7 @@
 				961BBA622A5D2D3600EE36AE /* NotificationService.swift in Sources */,
 				96094A432A5E7539004A4A62 /* Charge.swift in Sources */,
 				96094A3F2A5E70D4004A4A62 /* KeyChain.swift in Sources */,
+				96496D402A780B5900735F43 /* Agents.swift in Sources */,
 				96094A402A5E70D4004A4A62 /* LN.swift in Sources */,
 				96094A442A5E7D47004A4A62 /* UInt64.swift in Sources */,
 			);
@@ -409,6 +417,7 @@
 				96158F342A5B225E0053C4DA /* ReceiveView.swift in Sources */,
 				96094A422A5E73C3004A4A62 /* Charge.swift in Sources */,
 				96EF6A2C2A5745E800719F8F /* ContentView.swift in Sources */,
+				96496D3F2A77A8BB00735F43 /* AgentView.swift in Sources */,
 				96158F2F2A58A1020053C4DA /* AsyncButton.swift in Sources */,
 				96B4F3772A6D5435008FD347 /* ViewModel.swift in Sources */,
 				96B4F38B2A6D97C4008FD347 /* Agents.swift in Sources */,
@@ -433,6 +442,7 @@
 				96158F362A5B24710053C4DA /* String.swift in Sources */,
 				96158F222A589F300053C4DA /* LN.swift in Sources */,
 				96B4F38F2A6F02A6008FD347 /* ScannerView.swift in Sources */,
+				96496D3D2A779E2100735F43 /* AgentSetupView.swift in Sources */,
 				96B4F39C2A716517008FD347 /* CtaButton.swift in Sources */,
 				96B4F37D2A6D59E4008FD347 /* BalanceSummaryCard.swift in Sources */,
 			);

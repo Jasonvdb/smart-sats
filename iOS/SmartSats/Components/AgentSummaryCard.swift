@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AgentSummaryCard: View {
-    var agent: Agent
+    var agent: Agent?
     @Binding var isCompact: Bool
-
+    var isAddNew = false
+    
     var body: some View {
         VStack {
             RoundedRectangle(cornerRadius: isCompact ? 10 : 20)
@@ -18,12 +19,13 @@ struct AgentSummaryCard: View {
                 .blendMode(.overlay)
                 .frame(maxHeight: .infinity)
                 .overlay(
-                    Image(systemName: "person")
+                    Image(systemName: isAddNew ? "plus.viewfinder" : "person.and.background.dotted")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: .infinity)
+                        .padding(4)
                 )
-            Text(agent.name)
+            Text(agent?.name ?? "Add Agent")
                 .fontWeight(.semibold)
                 .minimumScaleFactor(0.6)
                 .foregroundStyle(Color.brandTextPrimary)
@@ -31,14 +33,10 @@ struct AgentSummaryCard: View {
                 .layoutPriority(1)
             
             if !isCompact {
-                Text("Last used 1 hour ago")
+                Text(agent != nil ? "\(agent!.usedBudget) / \(agent!.totalBudget) sats" : "Tap to open demo agent in the brower")
                     .font(.caption.weight(.light))
-                    .minimumScaleFactor(0.6)
-                    .foregroundStyle(Color.brandTextSecondary)
-                Spacer()
-                Text(agent.description)
-                    .font(.caption.weight(.light))
-                    .foregroundStyle(Color.brandTextSecondary.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color.brandTextSecondary.opacity(0.9))
                     .lineLimit(3)
             }
         }
@@ -59,6 +57,6 @@ struct AgentSummaryCard: View {
 
 struct AgentSummaryCard_Previews: PreviewProvider {
     static var previews: some View {
-        AgentSummaryCard(agent: .init(name: "Agent 1", description: "Bla bla bla"), isCompact: .constant(false))
+        AgentSummaryCard(agent: .init(id: "agent_1", name: "Agent 1", description: "Bla bla bla", pushServerId: "", totalBudget: 500, usedBudget: 100), isCompact: .constant(false))
     }
 }

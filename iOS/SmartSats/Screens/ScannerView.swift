@@ -28,6 +28,7 @@ struct ScannerView: View {
                 Spacer()
                 if message != "" {
                     Text(message)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(Color.brandAccent2)
                         .padding()
                         .padding()
@@ -61,6 +62,19 @@ struct ScannerView: View {
     func onScan(_ data: String) {
         Task {
             do {
+                //Check if we're linking an agent
+                if data.contains("smartsats:") {
+                    message = "Linking agent..."
+                    Agents.shared.agentRegisterUrl = data.replacingOccurrences(of: "smartsats:", with: "")
+                    dismiss()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        Agents.shared.showAgentSetup = true
+                    }
+                    
+                    return
+                }
+                
                 let type = try await ln.decode(data)
                 switch type {
                 case .bolt11(let invoice):

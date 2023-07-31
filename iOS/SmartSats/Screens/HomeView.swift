@@ -26,10 +26,13 @@ struct HomeView: View {
     
     @State var showReceive = false
     @State var showScanner = false
-
+    
     @State var showSettings = false
     @State var showNodeInfo = false
-
+    
+    @State var showAgent = false
+    @State var selectedAgent: Agent = .init(id: "selectedId", name: "", description: "", pushServerId: "", totalBudget: 0, usedBudget: 0)
+    
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color.brandTextPrimary.opacity(0.7))
         UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color.brandTextSecondary.opacity(0.3))
@@ -106,6 +109,15 @@ struct HomeView: View {
                     }
             )
             .overlay(buttons, alignment: .bottom)
+            .sheet(isPresented: $agents.showAgentSetup) {
+                AgentSetupView()
+            }
+            .onOpenURL { incomingURL in
+                agents.agentRegisterUrl = incomingURL.absoluteString.replacingOccurrences(of: "smartsats:", with: "")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    agents.showAgentSetup = true
+                }
+            }
         }
     }
     
@@ -119,7 +131,7 @@ struct HomeView: View {
             .accessibilityLabel("Settings")
             
             Spacer()
-//            Text("\(scrollOffset)")
+            //            Text("\(scrollOffset)")
             
             Button {
                 showSettings = true
@@ -141,17 +153,33 @@ struct HomeView: View {
     var agentList: some View {
         ScrollView(.horizontal){
             LazyHGrid(rows: [GridItem()]) {
-                ForEach(agents.list, id: \.self) { agent in
-                    AgentSummaryCard(agent: agent, isCompact: $isCompact)
+                if agents.list.count == 0 {
+                    AgentSummaryCard(agent: nil, isCompact: $isCompact)
                         .onTapGesture {
-                            //                            selectedAgent = agent
-                            //                            showAgent = true
+                            if let url = URL(string: DEMO_URL) {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                } else {
+                    ForEach(agents.list, id: \.self) { agent in
+                        AgentSummaryCard(agent: agent, isCompact: $isCompact)
+                            .onTapGesture {
+                                selectedAgent = agent
+                                showAgent = true
+                            }
+                    }
+                    AgentSummaryCard(agent: nil, isCompact: $isCompact, isAddNew: true)
+                        .onTapGesture {
+                            showScanner = true
                         }
                 }
             }
             .frame(maxHeight: isCompact ? defaultAgentListHeight * 0.6 : defaultAgentListHeight)
             .padding()
             .offset(y: isCompact ? -12 : -10)
+        }
+        .sheet(isPresented: $showAgent) {
+            AgentView(agent: $selectedAgent)
         }
     }
     

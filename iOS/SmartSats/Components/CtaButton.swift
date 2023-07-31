@@ -28,14 +28,14 @@ struct CtaButton: View {
                     LinearGradient(
                         gradient:
                             Gradient(colors: [
-                                Color.brandAccent2.opacity(1),
+                                Color.brandAccent1.opacity(1),
                                 Color.brandAccent2.opacity(0.6)
                             ]),
                         startPoint: .top,
                         endPoint: .bottom
                     )
                     .cornerRadius(20)
-                    .blendMode(.softLight)
+//                    .blendMode(.softLight)
                 }
                     .opacity(isPerformingTask ? 0.5 : 1)
                     .modifier(OutlineOverlay())
@@ -96,8 +96,8 @@ struct CtaButton: View {
                 ]),
                 center: .center
             ))
-            .padding(6)
-            .blur(radius: 20)
+            .padding(4)
+            .blur(radius: 12)
     }
 }
 

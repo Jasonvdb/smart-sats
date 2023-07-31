@@ -11,7 +11,8 @@ import BreezSDK
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var ln = LN.shared
-    
+    @ObservedObject var agents = Agents.shared
+
     @ObservedObject var viewModel = ViewModel.shared
     
     var body: some View {
@@ -25,6 +26,8 @@ struct ContentView: View {
         .onChange(of: scenePhase) { newPhase in
             Task {
                 do {
+                    agents.loadAgents()
+                    
                     guard ln.hasNode else {
                         return
                     }

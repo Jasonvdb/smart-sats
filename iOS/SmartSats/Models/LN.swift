@@ -38,6 +38,7 @@ enum LNErrors: Error {
     case missingMnumonic
     case missingInviteCode
     case sdkNotSet
+    case sendingDisabled
 }
 
 extension LNErrors: LocalizedError {
@@ -57,6 +58,8 @@ extension LNErrors: LocalizedError {
             return NSLocalizedString("Missing Greenlight invite code", comment: "Invite code set in onboarding")
         case .sdkNotSet:
             return NSLocalizedString("SDK not set (node not started)", comment: "User needs to start the node")
+        case .sendingDisabled:
+            return NSLocalizedString("Paying invoice directly currently disabled in demo mode. Payments can only be made to agents.", comment: "Sending currently diisabled in demo mode")
         }
     }
 }
@@ -240,7 +243,7 @@ class LN: ObservableObject {
             print("Connecting...")
             self.sdk = try BreezSDK.connect(config: config, seed: seed, listener: SDKListener());
             print("Connected")
-            self.syncUI()            
+            self.syncUI()
         }
     }
     
@@ -270,6 +273,10 @@ class LN: ObservableObject {
     }
     
     func pay(_ bolt11: String, amountSats: UInt64? = nil) async throws -> Payment {
+        if isInForeground {
+            throw LNErrors.sendingDisabled //For demo mode so funds don't easily get drained
+        }
+        
         guard let sdk else { throw LNErrors.sdkNotSet }
         return try await background {
             return try sdk.sendPayment(bolt11: bolt11, amountSats: amountSats)
@@ -277,7 +284,6 @@ class LN: ObservableObject {
     }
     
     func decode(_ data: String) async throws -> InputType {
-        guard let sdk else { throw LNErrors.sdkNotSet }
         return try await background {
             return try BreezSDK.parseInput(s: data)
         }

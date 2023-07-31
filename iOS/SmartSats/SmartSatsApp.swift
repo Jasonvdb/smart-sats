@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let DEMO_URL = "http://192.168.0.100:3000"
+
 //TODO move to util and show in onboarding
 func requestPushNotificationPermision(completionHandler: @escaping (Bool, Error?) -> Void) {
     let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -26,9 +28,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-       
         print("PUSH USER INFO")
         print(userInfo)
+        
+        Task {
+            try? await LN.shared.sync()
+        }
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -46,6 +51,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("PUSH USER INFO:")
         print(userInfo)
         
+        Task {
+            try? await LN.shared.sync()
+        }
+        
         // Change this to your preferred presentation option
         completionHandler([[.banner, .badge, .sound]])
     }
@@ -53,6 +62,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02hhx", $0) }.joined()
         print("***TOKEN \(token)")
+        Agents.shared.pushToken = token
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

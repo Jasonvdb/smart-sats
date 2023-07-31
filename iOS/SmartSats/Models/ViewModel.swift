@@ -19,7 +19,7 @@ class ViewModel: ObservableObject {
     private init() {}
     
     //Onboarding
-    @AppStorage("showOnboardingModal")  var showOnboardingModal = true
+    @AppStorage("showOnboardingModal") var showOnboardingModal = true
     @Published var dismissOnboardingModal = false
     @Published var selectedOnboardingModal: OnboardingModal = .intro1
 }

@@ -9,11 +9,11 @@ Budgets for your agents
 - [x] Mobile payment from background
 - [x] Mobile background payment logic
 - [x] Setup LND node for receiving payments
-- [ ] Push server auth
-- [ ] Server budgeting logic
-- [ ] Mobile budgeting logic
+- [x] Push server auth
+- [x] Server budgeting logic
+- [x] Mobile budgeting logic
 - [x] Mobile UI
-- [ ] Demo UI
+- [x] Demo UI
 - [ ] Deploy demo
 - [x] Push app to TestFlight
 - [ ] Refactor demo to use langchain

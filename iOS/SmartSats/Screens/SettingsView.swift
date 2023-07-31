@@ -57,7 +57,7 @@ struct SettingsView: View {
     
     var links: some View {
         Section("Links") {
-            Link(destination: URL(string: "https://github.com/Jasonvdb/smart-sats")!) {
+            Link(destination: URL(string: DEMO_URL)!) {
                 HStack {
                     Label("Demo agent", systemImage: "person.and.background.dotted")
                         .tint(Color.brandTextPrimary)
