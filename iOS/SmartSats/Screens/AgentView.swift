@@ -28,9 +28,9 @@ struct AgentView: View {
             
             Spacer()
             
-            #if DEBUG
-            Text("\(agent.pushServerId)")
-            #endif
+//            #if DEBUG
+//            Text("\(agent.pushServerId)")
+//            #endif
             
             Image(systemName: "person.and.background.dotted")
                 .resizable()

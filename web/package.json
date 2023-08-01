@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "build && surge"
+    "deploy": "yarn build && surge ./build cheap-web-dev-agent.surge.sh"
   },
   "eslintConfig": {
     "extends": [

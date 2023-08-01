@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let DEMO_URL = "http://192.168.0.100:3000"
+let DEMO_URL = "https://cheap-web-dev-agent.surge.sh"
 
 //TODO move to util and show in onboarding
 func requestPushNotificationPermision(completionHandler: @escaping (Bool, Error?) -> Void) {

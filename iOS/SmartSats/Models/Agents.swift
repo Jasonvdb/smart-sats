@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+let PUSH_SERVER_URL = "https://smartsatspush.intern.cheap"
+
 struct Agent: Hashable, Codable {
     let id: String
     let name: String
@@ -32,8 +34,6 @@ struct AgentServerResponse: Codable {
     let name: String
     let description: String
 }
-
-let pushServer = "http://192.168.0.100:8765" //TODO
 
 class Agents: ObservableObject {
     public static var shared = Agents()
@@ -68,7 +68,7 @@ class Agents: ObservableObject {
     func registerAgent(budget: UInt64) async throws {
         print("Registering agent...")
         
-        guard let pushServerUrl = URL(string: "\(pushServer)/register?token=\(pushToken)") else {
+        guard let pushServerUrl = URL(string: "\(PUSH_SERVER_URL)/register?token=\(pushToken)") else {
             print("Invalid push server url")
             return
         }
@@ -205,7 +205,7 @@ class Agents: ObservableObject {
     }
     
     func deleteAgent(_ agent: Agent) async throws {
-        guard let url = URL(string: "\(pushServer)/revoke?id=\(agent.pushServerId)") else {
+        guard let url = URL(string: "\(PUSH_SERVER_URL)/revoke?id=\(agent.pushServerId)") else {
             print("Invalid url")
             return
         }

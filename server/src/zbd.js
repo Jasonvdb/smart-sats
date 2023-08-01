@@ -1,4 +1,5 @@
 const {fancyDB} = require("./helpers");
+const fetch = require('node-fetch');
 const ZBD_API = process.env.ZBD_API;
 if (!ZBD_API) {
     console.error('ZBD_API environment variable is not set');

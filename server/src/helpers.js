@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 const HUGGING_FACE_API_KEY = process.env.HUGGING_FACE_API_KEY;
 if (!HUGGING_FACE_API_KEY) {
     console.error('HUGGING_FACE_API_KEY environment variable is not set');
@@ -38,7 +40,8 @@ const getRandomToken = () => {
 }
 
 const getRegistrationQR = (token) => {
-    return `smartsats:${REGISTRATION_HOST}:${REGISTRATION_PORT}/register?token=${token}`;
+    //TODO show host for development
+    return `smartsats:${REGISTRATION_HOST}/register?token=${token}`;
 }
 
 let fancyDB = {

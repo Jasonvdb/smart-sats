@@ -8,7 +8,7 @@ import Container from "react-bootstrap/Container";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Result from "../components/Result";
 
-const socket = io('http://192.168.0.100:3210', {
+const socket = io('https://cheapwebdev.intern.cheap', {
     auth: {
         token: 'your-auth-token' //TODO
     }

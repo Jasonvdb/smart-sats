@@ -42,7 +42,7 @@ const requestListener = (req, res) => {
         fancyDb[id] = query.token;
 
         res.writeHead(200);
-        const result = JSON.stringify({id, hook: `http://${host}:${port}/charge?token=${id}`})
+        const result = JSON.stringify({id, hook: `${host}/charge?token=${id}`})
         console.log(result);
         res.end(result);
         return;
@@ -98,11 +98,19 @@ const requestListener = (req, res) => {
         return;
     }
 
+    if (parts.pathname === "/info") {
+        res.writeHead(200);
+        const result = JSON.stringify({hook: `${host}/charge?token=123`})
+        console.log(result);
+        res.end(result);
+        return;
+    }
+
     res.writeHead(404);
     res.end("404 - Not found");
 };
 
 const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
